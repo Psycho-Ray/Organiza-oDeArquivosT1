@@ -3,7 +3,7 @@
 ## Divisão do trabalho:
 1. Leitura e gravação de registros (LTKills)
 2. Impressão de todos os registros + task 2
-3. Impressão de um registro procurando um campo
+3. Impressão de um registro procurando um campo (BrunoGomesCoelho)
 4. Impressão de registro de offset X e campo Y desse registro + task 2
 
 ## Tasks:
