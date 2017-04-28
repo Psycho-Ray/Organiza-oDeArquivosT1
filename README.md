@@ -3,6 +3,14 @@
 ## Documentação Externa:
 https://www.overleaf.com/9308801srxcvkdjrfdd
 
+## Ordem dos campos
+
+# Campos de tamanho fixo
+Mesma ordem de leitura: documento -> dataHoraCadastro -> dataHoraAtualiza -> ticket
+
+# Campos de tamanho variável
+Mesma ordem de leitura: domínio -> nome -> cidade -> uf
+
 ## Divisão do trabalho:
 [número] representa a especificação no PDF.
 Ver o PDF pois tem váris especificações não citadas aqui.
