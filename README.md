@@ -1,15 +1,16 @@
 # Organização De Arquivos T1 (Turma A)
 
 ## Divisão do trabalho:
-1. Leitura e gravação de registros (LTKills)
-2. Impressão de todos os registros + task 2
-3. Impressão de um registro procurando um campo (BrunoGomesCoelho)
-4. Impressão de registro de offset X e campo Y desse registro + task 2
+[número] representa a especificação no PDF.
+Ver o PDF pois tem váris especificações não citadas aqui.
+
+1. Leitura e gravação de registros (LTKills) - [2]
+2. Impressão de todos os registros + task 1 - [3] e [5]
+3. Impressão de um registro procurando um campo (BrunoGomesCoelho) - [4]
+4. Impressão de registro de offset X e campo Y desse registro - [6]
 
 ## Tasks:
-1. Criar função: dado *fp e offset, imprima o campo (precisa de um inteiro pra saber se o campo tem tamanho fixo, se for tamanho fixo esse inteiro é o tamanho do campo a ser impresso, se for -1, o tamanho é variável)
-2. Criar função: dado *fp e um offset, imprima todo o registro
-3. Criar função: procure pelo valor X no campo Y e imprima todos os registros para os quais isso seja verdade
+1. Criar função: dado *fp e um offset, imprima aquele registro [5]. Fazer modularizada para poder ser chamada por quem implementar a parte 3. Basta chamar essa função sequencialmente para a impressão de todos os registros [3].
 
 ## Tipos de arquivos
 Devem existir 3 tipos de organização de arquivos diferentes:
