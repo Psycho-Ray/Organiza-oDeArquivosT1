@@ -1,5 +1,8 @@
 # Organização De Arquivos T1 (Turma A)
 
+## Documentação Externa:
+https://www.overleaf.com/9308801srxcvkdjrfdd
+
 ## Divisão do trabalho:
 [número] representa a especificação no PDF.
 Ver o PDF pois tem váris especificações não citadas aqui.
