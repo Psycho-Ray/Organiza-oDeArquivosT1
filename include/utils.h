@@ -1,6 +1,8 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
+#define OPTION int
+
 typedef enum {
     NONE,
     READ_FROM_FILE,
@@ -9,10 +11,11 @@ typedef enum {
     SEARCH_BY_RECORD,
     SEARCH_BY_RECORD_BY_FIELD,
     EXIT
-} OPTION;
+} t_OPTION;
 
 typedef enum {
-    NONE,
+	ALGO,
+    // NONE,		com essa linha não compila, está redefinindo não do outro enum.
     // file organization types
 } FTYPE;
 
