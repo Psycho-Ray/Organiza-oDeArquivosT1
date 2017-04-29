@@ -1,24 +1,29 @@
+################################ VARIABLES ####################################
+
 CC=gcc
-#CFLAGS = -g -Wall					
-SRC=./src/
-OBJECTS = main.c
-INCLUDE=./include/
-#BINARIES=
-# OBS: "OBJECTS" used since otherwise gcc tries do compile backup file (main.c~, etc).
+CFLAGS = -g -Wall
+# Add the files that need to be compiled, like: src/file_name.c
+SRCS= src/main.c
+INCLUDE=./include
+EXEC=trabalho
 
-all:
-	$(CC) $(CFLAGS) -I $(INCLUDE) $(SRC)$(OBJECTS) -o trabalho
+###############################################################################
 
-run:
-	./trabalho
+all: compile
+
+compile:
+	$(CC) $(CFLAGS) -I$(INCLUDE) $(SRCS) -o $(EXEC)
+
+run: $(EXEC)
+	./$(EXEC)
 	
 	
 ############ FOR DEBUGGIN ONLY, REMOVE LATER ############ 
 # Remove "-g" from CFLAGS, only necessary for valgrind.
 # VALFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 
-val:
-	valgrind $(VALFLAGS) ./trabalho
+val: $(EXEC)
+	valgrind $(VALFLAGS) ./$(EXEC)
 
-clear:
-	rm $(BINARIES)
+clean:
+	rm $(EXEC)
