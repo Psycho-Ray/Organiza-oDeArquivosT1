@@ -24,6 +24,11 @@ run: $(EXEC)
 
 val: $(EXEC)
 	valgrind $(VALFLAGS) ./$(EXEC)
-
+	
 clean:
 	rm $(EXEC)
+	
+# Bruno usa isso
+open:	
+	gedit Makefile $(SRCS) $(include)/*
+

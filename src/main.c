@@ -19,7 +19,7 @@ void printMenu() {
 }
 
 FTYPE getFileType() {
-    FTYPE a;
+    FTYPE a = NONE;
     // pede o tipo de arquivo
     return a;
 }
@@ -30,33 +30,101 @@ void closeFiles() {
 
 int main(int argc, char *argv[]) {
     OPTION op = NONE;
-    FTYPE ftype = NONE;
-    FILE *fp = NULL;
-
-    ftype = getFileType();
-
+    TYPE_REG regType = NONE;
+    //FTYPE ftype = getFileType();
+    // FILE *fp = NULL;
+    
+    while (regType < 1 || regType > 3) {
+        printf("Digite 1 para registros de tamanho variável com indicador de tamanho\n");
+	    printf("Digite 2 para registros de tamanho variável com delimitadores entre registros\n");
+	    printf("Digite 3 para registros de tamanho variável com número fixo de campos\n");
+	    scanf("%d", &regType);
+    }
+    
+	/////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////  
+	char placeholder[50] = "Função ainda não implementada.\n";
+	///////////////////////////////////////////////////////////
+   
     while(op != EXIT) {
         printMenu();
         scanf("%d", &op);
+        
+        switch(regType) {
+        	case SIZE_INDICATOR:
+				switch(op) {
+				    case READ_FROM_FILE:
+				        printf("%s", placeholder);
+				        break;
+				    case PRINT_ALL:
+				        printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_FIELD:
+				        printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_RECORD:
+					    printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_RECORD_BY_FIELD:
+				    	printf("%s", placeholder);
+				        break;
+				    case EXIT:
+				        closeFiles(); // fclose and frees
+				        break;
+				    default:
+				        printf("Opcao Invalida\n");
+				        break;
+				}
 
-        switch(op) {
-            case READ_FROM_FILE:
-                break;
-            case PRINT_ALL:
-                break;
-            case SEARCH_BY_FIELD:
-                break;
-            case SEARCH_BY_RECORD:
-                break;
-            case SEARCH_BY_RECORD_BY_FIELD:
-                break;
-            case EXIT:
-                closeFiles(); // fclose and frees
-                break;
-            default:
-                printf("Opcao Invalida\n");
-                break;
-        }
+			case DELIMITER:
+				switch(op) {
+				    case READ_FROM_FILE:
+				        printf("%s", placeholder);
+				        break;
+				    case PRINT_ALL:
+				        printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_FIELD:
+				        printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_RECORD:
+					    printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_RECORD_BY_FIELD:
+				    	printf("%s", placeholder);
+				        break;
+				    case EXIT:
+				        closeFiles(); // fclose and frees
+				        break;
+				    default:
+				        printf("Opcao Invalida\n");
+				        break;
+				}
+			
+			case FIXED_FIELDS:
+				switch(op) {
+				    case READ_FROM_FILE:
+				        printf("%s", placeholder);
+				        break;
+				    case PRINT_ALL:
+				        printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_FIELD:
+				        printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_RECORD:
+					    printf("%s", placeholder);
+				        break;
+				    case SEARCH_BY_RECORD_BY_FIELD:
+				    	printf("%s", placeholder);
+				        break;
+				    case EXIT:
+				        closeFiles(); // fclose and frees
+				        break;
+				    default:
+				        printf("Opcao Invalida\n");
+				        break;
+				}
+		}
     }
 
     return 0;
