@@ -3,6 +3,21 @@
 
 #define OPTION int
 #define TYPE_REG int
+#define FIELD int
+
+
+enum {
+	INVALID,
+	DOMAIN,
+	DOCUMENT,
+	NAME,
+	CITY,
+	STATE,
+	DATE_CREATED,
+	DATE_UPDATED,
+	TICKET
+};
+
 
 enum {
     NONE,
