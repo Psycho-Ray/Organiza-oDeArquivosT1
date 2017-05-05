@@ -21,6 +21,7 @@ run: $(EXEC)
 ############ FOR DEBUGGIN ONLY, REMOVE LATER ############ 
 # Remove "-g" from CFLAGS, only necessary for valgrind.
 # VALFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
+# just a test
 
 val: $(EXEC)
 	valgrind $(VALFLAGS) ./$(EXEC)
