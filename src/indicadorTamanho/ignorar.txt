@@ -1,1 +1,0 @@
-Se a folder estiver vazio o git não deixe adicionar, mas podem ignorar esse arquivo
