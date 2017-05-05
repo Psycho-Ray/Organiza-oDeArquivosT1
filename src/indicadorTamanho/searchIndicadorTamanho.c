@@ -89,7 +89,7 @@ void indicadorTamanho_printDataBase(FILE *fp, int n) {
 	rewind(fp);
 }
 
-void indicadorTamanho_printRegister(FILE *fp, int n, int offset) {
+void indicadorTamanho_printRecord(FILE *fp, int n, int offset) {
 	int register_size, domain_size, document_number_size, name_size, city_size;
 	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket, i; 
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
@@ -167,4 +167,7 @@ void indicadorTamanho_printRegister(FILE *fp, int n, int offset) {
 	free(state);
 	free(dateTimeOri);
 	free(dateTimeUpd);
+
+	// Make the file pointer return to the begging of the file
+	rewind(fp);
 }

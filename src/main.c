@@ -56,12 +56,16 @@ int main(int argc, char *argv[]) {
 				        printf("%s", placeholder);
 				        break;
 				    case PRINT_ALL:
-				        printf("%s", placeholder);
-				        break;
-				    case SEARCH_BY_FIELD:
-				        printf("%s", placeholder);
+				        // Precisa de um ponteiro para o arquivo de registros e a quantidade de registros
+						// void indicadorTamanho_printDataBase(FILE *fp, int n);
+				        printf("Done");
 				        break;
 				    case SEARCH_BY_RECORD:
+						// Precisa de um ponteiro para o arquivo de registros, a quantidade de registros e qual se deseja procurar
+						// void indicadorTamanho_printRecord(FILE *fp, int n, int offset);
+				        printf("Done");
+				        break;
+				    case SEARCH_BY_FIELD:
 					    printf("%s", placeholder);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
