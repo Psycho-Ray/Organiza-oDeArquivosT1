@@ -22,8 +22,8 @@ t_searchField searchFieldMainMain() {
 			printf("1 - Domain\n");
 			printf("2 - Documento\n");
 			printf("3 - Nome\n");
-			printf("4 - Estado\n");
-			printf("5 - Cidade\n");
+			printf("4 - Cidade\n");
+			printf("5 - Estado\n");
 			printf("6 - Data e hora de criação\n");
 			printf("7 - Data e hora de última atualização\n");
 			printf("8 - Ticket\n");
@@ -42,12 +42,16 @@ t_searchField searchFieldMainMain() {
 		search.query = readLine(stdin, '\n', '\n');
 		
 		switch(op) {
-			case DOCUMENT:	// example : 000.394.411/0001-09
-				if ( strlen(search.query) != SIZE_DOCUMENT || search.query[3] != '.' || search.query[7] != '.' ||
-					 search.query
+			case DOCUMENT:
+				if ( !verifyInputDocument(search.query) );
+					printf("Documento %s", memError);
+				break;
+			case DATE_CREATED
+
 		}
+		
 		// Verifies  if the user choose a fixed sized field, but did not write the correct amount of characters
-		if (op == DOCUMENT && strlen(search.query) != SIZE_DOCUMENT)
+		if (op == DOCUMENT && verifyInputDocument(search.query) == false)
 			printf("Documento %s", memError);
 		else if ( (op == DATE_CREATED || op == DATE_UPDATED) && strlen(search.query) != SIZE_TIME ) 
 			printf("Data %s", memError);
