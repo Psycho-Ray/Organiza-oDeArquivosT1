@@ -1,22 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 #include <string.h>
 
-#include <printTamanho.h>
 #include <utils.h>
 #include <searchFieldMain.h>
 
 
 void searchFieldIndicadorTam(FILE *fp) {
-	t_search search;
+	t_searchField search;
 	bool found = false;	
-	int regSize, current_pos;
-	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket, i; 
+	int regSize, count = 0;
+	int domain_size, document_number_size, name_size, city_size;
+	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket;
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri, *dateTimeUpd;
 	
-	search = searchFieldMain;
+	search = searchFieldMain();
 	
 	// if the user has decided to abort
 	if (search.fieldType == INVALID)
@@ -74,16 +73,19 @@ void searchFieldIndicadorTam(FILE *fp) {
 		fread(&ticket, sizeof(int), 1, fp);  // The number itself
 		
 		if( (search.fieldType == DOMAIN && strcmp(domain, search.query)) ||
-			(search.fieldType == DOCUMENT && strcmp(document, search.query)) ||
+			(search.fieldType == DOCUMENT && strcmp(document_number, search.query)) ||
 			(search.fieldType == NAME && strcmp(name, search.query)) ||
 			(search.fieldType == CITY && strcmp(city, search.query)) ||
 			(search.fieldType == STATE && strcmp(state, search.query)) ||
 			(search.fieldType == DATE_CREATED && strcmp(dateTimeOri, search.query)) ||
 			(search.fieldType == DATE_UPDATED && strcmp(dateTimeUpd, search.query)) ||
 			(search.fieldType == TICKET && ticket == atoi(search.query))
-		  ) {
-				printRegister(domain, document, name, city, state, dateTimeOri, dateTimeUpd, ticket);
-				found = true;
+		  ) 
+		{
+			/* TODO: Estou contando quantas vezes acho o valor e imprimindo isso junto, verificar 
+				se isso é uma boa ideia */
+			printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, ++count, ticket);
+			found = true;
 		}
 		fread(&regSize, sizeof(int), 1, fp);
 		

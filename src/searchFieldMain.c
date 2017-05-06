@@ -1,15 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <utils.h>
-#include <stbbool.h>
+#include <stdbool.h>
 #include <string.h>
-#include <serchFieldMain.h>
+
+#include <searchFieldMain.h>
+#include <utils.h>
 
 
-t_searchField searchMain() {
+t_searchField searchFieldMainMain() {
 	bool validInput = false;
 	int op = -1;
-	char *query, memError[100] = "em formato não válido digitado. Por favor tente de novo ou digite uma string vazia para abortar\n";
+	char memError[100] = "em formato não válido digitado. Por favor tente de novo ou digite uma string vazia para abortar\n";
 	t_searchField search;
 	search.fieldType = INVALID;
 	
@@ -40,15 +42,15 @@ t_searchField searchMain() {
 		search.query = readLine(stdin, '\n', '\n');
 		
 		// Verifies  if the user choose a fixed sized field, but did not write the correct amount of characters
-		if (op == DOCUMENT && strlen(query) != SIZE_DOCUMENT)
+		if (op == DOCUMENT && strlen(search.query) != SIZE_DOCUMENT)
 			printf("Documento %s", memError);
-		else if ( (op == DATE_CREATED || op == DATE_UPDATED) && strlen(query) != SIZE_TIME ) 
+		else if ( (op == DATE_CREATED || op == DATE_UPDATED) && strlen(search.query) != SIZE_TIME ) 
 			printf("Data %s", memError);
-		else if ( (op == TICKET && strlen(query) != SIZE_TICKET))
+		else if ( (op == TICKET && strlen(search.query) != SIZE_TICKET))
 			printf("Ticket %s", memError);
 		else
 			return search;				 
 	}
+	return search;
 }
-
 

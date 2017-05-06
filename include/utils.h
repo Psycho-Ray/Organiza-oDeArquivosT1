@@ -55,5 +55,7 @@ typedef enum {
 
 void printField(char *name, char *domain, char *document_number, char *city, 
 				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket);
+				
+char *readLine(FILE *stream, char separador, char fim_linha);
 
 #endif

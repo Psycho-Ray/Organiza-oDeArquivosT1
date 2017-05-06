@@ -7,7 +7,7 @@
 
 // TODO: Simplificar a readLine, não precisa ter um seprados e um fim_linha.
 // TODO: Traduzir para inglês.
-char * readLine(FILE *stream, char separador, char fim_linha) {
+char *readLine(FILE *stream, char separador, char fim_linha) {
     /* Le de um stream um input até encontrar o char separador,  fim_linha ou ser o fim do arq.
     Alocamos 50 bytes pra o input, e caso passe disso, incrementamos de 50 em 50 até ter toda a mensagem. 
     Depois, eliminamos bytes desnecessários */

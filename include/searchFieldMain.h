@@ -6,6 +6,6 @@ typedef struct {
 	int fieldType;
 } t_searchField;
 
-t_searchField searchMain();
+t_searchField searchFieldMain();
 
 #endif
