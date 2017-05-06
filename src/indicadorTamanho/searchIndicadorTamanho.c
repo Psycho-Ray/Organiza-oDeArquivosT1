@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 /*
 	
@@ -104,6 +105,9 @@ void indicadorTamanho_printRecord(FILE *fp, int n, int offset) {
 	// Go to the offset requested
 	for (i = 0; i < offset; i++) {
 		fread(&register_size, sizeof(int), 1, fp);
+
+		// Se o contador do registro contar ele mesmo, deve ser register_size -4. 
+		//  Ver com o Cruz depois como ele implementou 
 		fseek(fp, register_size, SEEK_CUR);
 	}
 
@@ -150,13 +154,20 @@ void indicadorTamanho_printRecord(FILE *fp, int n, int offset) {
 	fread(&ticket, sizeof(int), 1, fp);  // The number itself
 
 	// Print the information
-	printf("\t%d - %s\n", i, name);
-	printf("\t\t\tDomain: \t%s\n", domain);
-	printf("\t\t\tDocument Number: \t%s\n", document_number);
-	printf("\t\t\tCity: \t%s\n", city);
-	printf("\t\t\tState: \t%s\n", state);
-	printf("\t\t\tDate and time created: \t%s\n", dateTimeOri);
-	printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
+	if (strcmp(name, "null")) 
+		printf("\t%d - %s\n", offset, name);
+	if (strcmp(domain, "null")) 
+		printf("\t\t\tDomain: \t%s\n", domain);
+	if (strcmp(document_number, "null")) 
+		printf("\t\t\tDocument Number: \t%s\n", document_number);
+	if (strcmp(city, "null")) 
+		printf("\t\t\tCity: \t%s\n", city);
+	if (strcmp(state, "null")) 
+		printf("\t\t\tState: \t%s\n", state);
+	if (strcmp(dateTimeOri, "null")) 
+		printf("\t\t\tDate and time created: \t%s\n", dateTimeOri);
+	if (strcmp(dateTimeUpd, "null")) 
+		printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
 	printf("\t\t\tTicket number: \t%d\n", ticket);
 
 	// Free the strings
