@@ -3,7 +3,7 @@
 CC=gcc
 CFLAGS = -g -Wall
 # Add the files that need to be compiled, like: src/file_name.c
-SRCS= src/main.c src/indicadorTamanho/* src/delimitador/* src/utils.c
+SRCS= src/main.c src/indicadorTamanho/* src/delimitador/*  src/numFixosCampos/* src/utils.c
 INCLUDE=./include
 EXEC=trabalho
 

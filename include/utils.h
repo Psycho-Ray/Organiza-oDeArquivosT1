@@ -37,14 +37,14 @@ enum {
 };
 
 typedef struct  {
-    int register_size, domain_size, document_number_size, name_size, city_size;
-    int state_size, dateTimeOri_size, dateTimeUpd_size, record_size;
+    int domain_size, document_number_size, name_size, city_size, state_size;
+    int dateTimeOri_size, dateTimeUpd_size, record_size;
 } RECORD_SIZE;
 
 
 typedef enum {
 	ALGO,
-    // NONE,		com essa linha não compila, está redefinindo não do outro enum.
+    // NONE,om essa linha não compila, está redefinindo não do outro enum.
     // file organization types
 } FTYPE;
 
