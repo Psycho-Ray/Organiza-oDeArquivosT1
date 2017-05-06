@@ -41,11 +41,19 @@ enum {
 	FIXED_FIELDS
 };
 
+typedef struct  {
+    int domain_size, document_number_size, name_size, city_size, state_size;
+    int dateTimeOri_size, dateTimeUpd_size, record_size;
+} RECORD_SIZE;
+
 
 typedef enum {
 	ALGO,
-    // NONE,		com essa linha não compila, está redefinindo não do outro enum.
+    // NONE,om essa linha não compila, está redefinindo não do outro enum.
     // file organization types
 } FTYPE;
+
+void printField(char *name, char *domain, char *document_number, char *city, 
+				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket);
 
 #endif
