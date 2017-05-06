@@ -15,18 +15,18 @@ t_searchField searchFieldMainMain() {
 	t_searchField search;
 	search.fieldType = INVALID;
 	
-	while( !validInput) {
-	
+	while( !validInput) {	
 		while (op >= 0 && op < 9) {
+			// TODO: Reordenar isso
 			printf("Digite o número correspondente ao campo que quer pesquisar nos registros, ou 0 para abortar e voltar ao menu\n");
-			printf("1 - Documento\n");
-			printf("2 - Data e hora de criação\n");
-			printf("3 - Data e hora de última atualização\n");
-			printf("4 - Ticket\n");
-			printf("5 - Domínio\n");
-			printf("6 - Nome\n");
-			printf("7 - Cidade\n");
-			printf("8 - Estado\n");
+			printf("1 - Domain\n");
+			printf("2 - Documento\n");
+			printf("3 - Nome\n");
+			printf("4 - Estado\n");
+			printf("5 - Cidade\n");
+			printf("6 - Data e hora de criação\n");
+			printf("7 - Data e hora de última atualização\n");
+			printf("8 - Ticket\n");
 		
 			scanf("%d", &op);
 		
@@ -41,6 +41,11 @@ t_searchField searchFieldMainMain() {
 		search.fieldType = op;
 		search.query = readLine(stdin, '\n', '\n');
 		
+		switch(op) {
+			case DOCUMENT:	// example : 000.394.411/0001-09
+				if ( strlen(search.query) != SIZE_DOCUMENT || search.query[3] != '.' || search.query[7] != '.' ||
+					 search.query
+		}
 		// Verifies  if the user choose a fixed sized field, but did not write the correct amount of characters
 		if (op == DOCUMENT && strlen(search.query) != SIZE_DOCUMENT)
 			printf("Documento %s", memError);

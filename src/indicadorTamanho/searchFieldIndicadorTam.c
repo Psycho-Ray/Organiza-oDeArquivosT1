@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
+#include <string.h>	// strcmp, strlen
 
 #include <utils.h>
 #include <searchFieldMain.h>
@@ -18,7 +18,7 @@ void searchFieldIndicadorTam(FILE *fp) {
 	search = searchFieldMain();
 	
 	// if the user has decided to abort
-	if (search.fieldType == INVALID)
+	if (search.fieldType == INVALID || strlen(search.query) == 0)
 		return;
 	
 	fread(&regSize, sizeof(int), 1, fp);

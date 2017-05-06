@@ -30,5 +30,5 @@ clean:
 	
 # Bruno usa isso
 open:	
-	gedit Makefile $(SRCS) $(include)/*
+	gedit Makefile $(SRCS)
 
