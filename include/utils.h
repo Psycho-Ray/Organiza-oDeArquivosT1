@@ -5,6 +5,11 @@
 #define TYPE_REG int
 #define FIELD int
 
+// Size of the fields that hava a fixed length, as chars
+#define SIZE_DOCUMENT 19
+#define SIZE_TIME 19
+#define SIZE_TICKET 4
+
 
 enum {
 	INVALID,
