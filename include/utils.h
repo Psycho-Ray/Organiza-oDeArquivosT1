@@ -36,6 +36,11 @@ enum {
 	FIXED_FIELDS
 };
 
+typedef struct  {
+    int register_size, domain_size, document_number_size, name_size, city_size;
+    int state_size, dateTimeOri_size, dateTimeUpd_size, record_size;
+} RECORD_SIZE;
+
 
 typedef enum {
 	ALGO,

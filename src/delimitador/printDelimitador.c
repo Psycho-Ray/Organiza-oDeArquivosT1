@@ -123,6 +123,7 @@ void delimiter_printDataBase(FILE *fp, int n) {
 		}
 	}
 
+	// Make the file pointer return to the begging of the file
 	rewind(fp);
 }
 
