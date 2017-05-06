@@ -53,4 +53,7 @@ typedef enum {
     // file organization types
 } FTYPE;
 
+void printField(char *name, char *domain, char *document_number, char *city, 
+				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket);
+
 #endif

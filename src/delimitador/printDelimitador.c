@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <utils.h>
+
 
 /*
 	
@@ -28,21 +30,7 @@ void delimiter_printDataBase(FILE *fp, int n) {
 
 			// If the record is over, print the information
 			if (aux == '#') {
-				if (strcmp(name, "null")) 
-					printf("\t%d - %s\n", record_counter, name);
-				if (strcmp(domain, "null")) 
-					printf("\t\t\tDomain: \t%s\n", domain);
-				if (strcmp(document_number, "null")) 
-					printf("\t\t\tDocument Number: \t%s\n", document_number);
-				if (strcmp(city, "null")) 
-					printf("\t\t\tCity: \t%s\n", city);
-				if (strcmp(state, "null")) 
-					printf("\t\t\tState: \t%s\n", state);
-				if (strcmp(dateTimeOri, "null")) 
-					printf("\t\t\tDate and time created: \t%s\n", dateTimeOri);
-				if (strcmp(dateTimeUpd, "null")) 
-					printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
-				printf("\t\t\tTicket number: \t%d\n", ticket);
+			printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, record_counter, ticket);
 
 				// Free the strings
 				free(name);
@@ -219,21 +207,7 @@ void delimiter_printRecord(FILE *fp, int n, int offset) {
 	}
 
 	// Print the information
-	if (strcmp(name, "null")) 
-		printf("\t%d - %s\n", offset, name);
-	if (strcmp(domain, "null")) 
-		printf("\t\t\tDomain: \t%s\n", domain);
-	if (strcmp(document_number, "null")) 
-		printf("\t\t\tDocument Number: \t%s\n", document_number);
-	if (strcmp(city, "null")) 
-		printf("\t\t\tCity: \t%s\n", city);
-	if (strcmp(state, "null")) 
-		printf("\t\t\tState: \t%s\n", state);
-	if (strcmp(dateTimeOri, "null")) 
-		printf("\t\t\tDate and time created: \t%s\n", dateTimeOri);
-	if (strcmp(dateTimeUpd, "null")) 
-		printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
-	printf("\t\t\tTicket number: \t%d\n", ticket);
+	printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, offset, ticket);
 
 	// Free the strings
 	free(name);

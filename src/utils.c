@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 #include <utils.h>
 
 
@@ -28,6 +30,26 @@ char * readLine(FILE *stream, char separador, char fim_linha) {
     string = realloc(string, (i+1)*sizeof(char)); //elimina bytes desnecessários
     string[i] = '\0'; //adicionando um \0 no fim da string
     return string;
+}
+
+void printField(char *name, char *domain, char *document_number, char *city, 
+				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket) {
+				
+	if (strcmp(name, "null")) 
+		printf("\t%d - %s\n", offset, name);
+	if (strcmp(domain, "null")) 
+		printf("\t\t\tDomain: \t%s\n", domain);
+	if (strcmp(document_number, "null")) 
+		printf("\t\t\tDocument Number: \t%s\n", document_number);
+	if (strcmp(city, "null")) 
+		printf("\t\t\tCity: \t%s\n", city);
+	if (strcmp(state, "null")) 
+		printf("\t\t\tState: \t%s\n", state);
+	if (strcmp(dateTimeOri, "null")) 
+		printf("\t\t\tDate and time created: \t%s\n", dateTimeOri);
+	if (strcmp(dateTimeUpd, "null")) 
+		printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
+	printf("\t\t\tTicket number: \t%d\n", ticket);
 }
 
 
