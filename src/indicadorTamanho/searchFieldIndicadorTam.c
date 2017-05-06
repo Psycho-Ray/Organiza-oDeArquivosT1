@@ -8,13 +8,13 @@
 #include <utils.h>
 #include <searchFieldMain.h>
 
-void searchFieldIndicadorTam(FILE *fp, int n) {
+
+void searchFieldIndicadorTam(FILE *fp) {
 	t_search search;
 	bool found = false;	
 	int regSize, current_pos;
 	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket, i; 
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri, *dateTimeUpd;
-	
 	
 	search = searchFieldMain;
 	
@@ -22,17 +22,17 @@ void searchFieldIndicadorTam(FILE *fp, int n) {
 	if (search.fieldType == INVALID)
 		return;
 	
+	fread(&regSize, sizeof(int), 1, fp);
+	/* TODO upoe que guardamos 0 no final do arquivo quando chegamos ao fim dos registros.
+		falar com o Gabriel Cruz sobre como ele implementou. */
+	while(regSize != 0) {
 	
-	/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
-		Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
-		se estiver errado aquele domínio, apenas ler o tamanho do campo e dar fseek.
-		Mas isso envolveria implementar 8 ifs diferente, muuuitos iguais....
-		Posso deixar assim e mencionar isso no relatório? 
-	*/
-	for (i = 0; i < n; i += 1) {
-		
-		// TODO: what if this is zero?	
-		fread(&regSize, sizeof(int), 1, fp);
+		/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
+			Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
+			se estiver errado aquele domínio, apenas ler o tamanho do campo e dar fseek.
+			Mas isso envolveria implementar 8 ifs diferente, muuuitos iguais....
+			Posso deixar assim e mencionar isso no relatório? 
+		*/
 		
 		// Read's the domain
 		fread(&domain_size, sizeof(int), 1, fp);
@@ -84,10 +84,11 @@ void searchFieldIndicadorTam(FILE *fp, int n) {
 		  ) {
 				printRegister(domain, document, name, city, state, dateTimeOri, dateTimeUpd, ticket);
 				found = true;
-			}
 		}
+		fread(&regSize, sizeof(int), 1, fp);
 		
-		if(!found)
-			printf("Campo não encontrado em nenhum registro do arquivo.\n");
-		printf("Retornando ao menu\n");		
+	}
+	if(!found)
+	printf("Campo não encontrado em nenhum registro do arquivo.\n");
+	printf("Retornando ao menu\n");
 }
