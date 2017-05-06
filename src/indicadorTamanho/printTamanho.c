@@ -16,7 +16,7 @@
 */
 
 
-void indicadorTamanho_printDataBase(FILE *fp, int n) {
+void size_printDataBase(FILE *fp, int n) {
 	int register_size, domain_size, document_number_size, name_size, city_size;
 	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket, i; 
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
@@ -90,7 +90,7 @@ void indicadorTamanho_printDataBase(FILE *fp, int n) {
 	rewind(fp);
 }
 
-void indicadorTamanho_printRecord(FILE *fp, int n, int offset) {
+void size_printRecord(FILE *fp, int n, int offset) {
 	int register_size, domain_size, document_number_size, name_size, city_size;
 	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket, i; 
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
