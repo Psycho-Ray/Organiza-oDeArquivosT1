@@ -3,7 +3,7 @@
 CC=gcc
 CFLAGS = -g -Wall
 # Add the files that need to be compiled, like: src/file_name.c
-SRCS= src/main.c src/indicadorTamanho/* src/utils
+SRCS= src/main.c src/indicadorTamanho/* src/delimitador/*  src/numFixosCampos/* src/utils.c
 INCLUDE=./include
 EXEC=trabalho
 
@@ -21,6 +21,7 @@ run: $(EXEC)
 ############ FOR DEBUGGIN ONLY, REMOVE LATER ############ 
 # Remove "-g" from CFLAGS, only necessary for valgrind.
 # VALFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
+# just a test
 
 val: $(EXEC)
 	valgrind $(VALFLAGS) ./$(EXEC)
