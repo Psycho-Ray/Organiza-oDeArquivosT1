@@ -1,6 +1,8 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
+#include <stdbool.h>
+
 #define OPTION int
 #define TYPE_REG int
 #define FIELD int
@@ -55,5 +57,9 @@ typedef enum {
 
 void printField(char *name, char *domain, char *document_number, char *city, 
 				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket);
+				
+char *readLine(FILE *stream, char separador, char fim_linha);
+
+bool verifyInputDocument(char *doc);
 
 #endif
