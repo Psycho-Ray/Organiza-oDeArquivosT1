@@ -10,9 +10,7 @@ OUTPUT=answer.dat
 
 ###############################################################################
 
-all:
-	make clear
-	make compile
+all: compile
 
 compile:
 	$(CC) $(CFLAGS) -I$(INCLUDE) $(SRCS) -o $(EXEC)
