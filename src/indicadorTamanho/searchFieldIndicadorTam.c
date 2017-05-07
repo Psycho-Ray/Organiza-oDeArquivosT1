@@ -11,8 +11,8 @@ void searchFieldIndicadorTam(FILE *fp) {
 	t_searchField search;
 	bool found = false;	
 	int regSize, count = 0;
-	int domain_size, name_size, city_size;
-	int state_size;
+	int domain_size, document_number_size, name_size, city_size;
+	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket;
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri, *dateTimeUpd;
 	
 	search = searchFieldMain();
@@ -92,3 +92,4 @@ void searchFieldIndicadorTam(FILE *fp) {
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");
 }
+
