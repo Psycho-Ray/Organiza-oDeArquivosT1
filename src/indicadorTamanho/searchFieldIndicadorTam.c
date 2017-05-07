@@ -11,8 +11,8 @@ void searchFieldIndicadorTam(FILE *fp) {
 	t_searchField search;
 	bool found = false;	
 	int regSize, count = 0;
-	int domain_size, document_number_size, name_size, city_size;
-	int state_size, dateTimeOri_size, dateTimeUpd_size, ticket;
+	int domain_size, name_size, city_size;
+	int state_size;
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri, *dateTimeUpd;
 	
 	search = searchFieldMain();
@@ -61,12 +61,10 @@ void searchFieldIndicadorTam(FILE *fp) {
 		fread(state, sizeof(char), state_size, fp);
 
 		// Read's the date and time when the domain was created
-		fread(&dateTimeOri_size, sizeof(int), 1, fp);
 		dateTimeOri = (char *) malloc(sizeof(char) * (dateTimeOri_size));
 		fread(dateTimeOri, sizeof(char), dateTimeOri_size, fp);
 
 		// Read's the date and time of when the file was last modified
-		fread(&dateTimeUpd_size, sizeof(int), 1, fp);
 		dateTimeUpd = (char *) malloc(sizeof(char) * (dateTimeUpd_size));
 		fread(dateTimeUpd, sizeof(char), dateTimeUpd_size, fp);
 

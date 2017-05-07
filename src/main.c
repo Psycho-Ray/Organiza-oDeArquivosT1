@@ -11,6 +11,9 @@
 #include <printFixo.h>
 #include <printDelimitador.h>
 #include <printTamanho.h>
+#include <readFixo.h>
+#include <readDelimitador.h>
+#include <readTamanho.h>
 
 void printMenu() {
     printf("1 - Ler a partir do arquivo\n");
@@ -21,21 +24,16 @@ void printMenu() {
     printf("6 - Sair\n");
 }
 
-FTYPE getFileType() {
-    FTYPE a = NONE;
-    // pede o tipo de arquivo
-    return a;
-}
-
-void closeFiles() {
-    // fcloses and frees
+void closeFiles(FILE *input, FILE *output) {
+    fclose(input);
+    fclose(output);
 }
 
 int main(int argc, char *argv[]) {
     OPTION op = NONE;
     TYPE_REG regType = NONE;
-    //FTYPE ftype = getFileType();
-    // FILE *fp = NULL;
+    FILE *input = fopen("Dominios.csv", "r+"), *output;
+    int nregs, nfields, offset = 0;
     
     while (regType < 1 || regType > 3) {
         printf("Digite 1 para registros de tamanho variável com indicador de tamanho\n");
@@ -56,7 +54,7 @@ int main(int argc, char *argv[]) {
         	case SIZE_INDICATOR:
 				switch(op) {
 				    case READ_FROM_FILE:
-				        printf("%s", placeholder);
+                        output = size_readDataBase(input, &nregs, &nfields);
 				        break;
 				    case PRINT_ALL:
 				        // Precisa de um ponteiro para o arquivo de registros e a quantidade de registros
@@ -75,26 +73,27 @@ int main(int argc, char *argv[]) {
 				    	printf("%s", placeholder);
 				        break;
 				    case EXIT:
-				        closeFiles(); // fclose and frees
+				        //closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
 				        printf("Opcao Invalida\n");
 				        break;
 				}
+                break;
 
 			case DELIMITER:
 				switch(op) {
 				    case READ_FROM_FILE:
-				        printf("%s", placeholder);
+                        output = delimiter_readDataBase(input, &nregs, &nfields);
 				        break;
 				    case PRINT_ALL:
 				    	// Precisa de um ponteiro para o arquivo de registros e a quantidade de registros 
-				    	// void delimiter_printDataBase(FILE *fp, int n);
+				    	delimiter_printDataBase(output, nregs);
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_RECORD:
 				    	// Precisa de um ponteiro para o arquivo de registros, a quantidade de registros e qual se deseja procurar
-						// void delimiter_printRecord(FILE *fp, int n, int offset);
+						delimiter_printRecord(output, nregs, offset);
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
@@ -104,17 +103,18 @@ int main(int argc, char *argv[]) {
 				    	printf("%s", placeholder);
 				        break;
 				    case EXIT:
-				        closeFiles(); // fclose and frees
+				        //closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
 				        printf("Opcao Invalida\n");
 				        break;
 				}
+                break;
 			
 			case FIXED_FIELDS:
 				switch(op) {
 				    case READ_FROM_FILE:
-				        printf("%s", placeholder);
+                        output = fixed_readDataBase(input, &nregs, &nfields);
 				        break;
 				    case PRINT_ALL:
 				    	// Precisa de uma struct RECORD_SIZE com o tamanho de cada campo e o do registro nela
@@ -135,14 +135,15 @@ int main(int argc, char *argv[]) {
 				    	printf("%s", placeholder);
 				        break;
 				    case EXIT:
-				        closeFiles(); // fclose and frees
+				        //closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
 				        printf("Opcao Invalida\n");
 				        break;
 				}
+                break;
 		}
     }
-
+    closeFiles(input, output);
     return 0;
 }
