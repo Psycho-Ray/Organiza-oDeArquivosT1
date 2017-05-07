@@ -24,7 +24,7 @@ typedef struct {
 	char *state;
 	char *dateTimeOri;
 	char *dateTimeUpd;
-	int ticket;
+	char *ticket;
 } t_field;
 
 
