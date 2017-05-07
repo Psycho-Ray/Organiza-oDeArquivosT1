@@ -21,8 +21,7 @@ void searchFieldIndicadorTam(FILE *fp) {
 	if (search.fieldType == INVALID || strlen(search.query) == 0)
 		return;
 	
-	fread(&regSize, sizeof(int), 1, fp);
-	/* TODO upoe que guardamos 0 no final do arquivo quando chegamos ao fim dos registros.
+	/* TODO supoe que guardamos 0 no final do arquivo quando chegamos ao fim dos registros.
 		falar com o Gabriel Cruz sobre como ele implementou. */
 	while (!feof(fp)) {
 	
@@ -35,6 +34,7 @@ void searchFieldIndicadorTam(FILE *fp) {
 			Mas isso envolveria implementar 8 ifs diferente, muuuitos iguais....
 			Posso deixar assim e mencionar isso no relatório? 
 		*/
+		// TODO: Supoe que guardamos o \0 na string
 		
 		// Read's the domain
 		fread(&domain_size, sizeof(int), 1, fp);
@@ -42,8 +42,7 @@ void searchFieldIndicadorTam(FILE *fp) {
 		fread(domain, sizeof(char), domain_size, fp);
 		
 		// Read's the document number
-		fread(&document_number_size, sizeof(int), 1, fp);
-		document_number = (char *) malloc(sizeof(char) * (document_number_size));
+		document_number = (char *) malloc(sizeof(char) * (SIZE_DOCUMENT));
 		fread(document_number, sizeof(char), document_number_size, fp);
 
 		// Read's the name 

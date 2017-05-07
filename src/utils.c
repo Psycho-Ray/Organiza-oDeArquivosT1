@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>	// strcmp
-#include <ctype.h> 	// isdigit
 
 #include <utils.h>
 
@@ -54,26 +53,4 @@ void printField(char *name, char *domain, char *document_number, char *city,
 		printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
 	printf("\t\t\tTicket number: \t%d\n", ticket);
 }
-
-
-/* OBS: Quem for ler o input, mantenha-se atento ao fato que qualquer modificação aqui pode resultar em mudanças
-		na verificação do input durante a busca por um campo (Bruno). */
-bool verifyInputDocument(char *doc) {
-	// example of a valid input : 000.394.411/0001-09
-	
-	// Verifies the size of the input and the special characters.
-	if ( strlen(doc) != SIZE_DOCUMENT || doc[3] != '.' || doc[7] != '.' ||
-		 doc[11] != '/' || doc[16] != '-')
-		 	 return false;
-	
-	// Verifies the digits
-	if ( isdigit(doc[0]) && isdigit(doc[1]) && isdigit(doc[2]) && isdigit(doc[4]) && isdigit(doc[5]) && isdigit(doc[6]) &&
-		 isdigit(doc[8]) && isdigit(doc[9]) && isdigit(doc[10]) && isdigit(doc[12]) && isdigit(doc[13]) && isdigit(doc[14]) && 
-		 isdigit(doc[15]) && isdigit(doc[17]) && isdigit(doc[18]) ) return true;
-	return false;
-}
-
-
-// TODO: Criar os outros verificadores para os campos de tamanho fixo.
-
 

@@ -60,6 +60,4 @@ void printField(char *name, char *domain, char *document_number, char *city,
 				
 char *readLine(FILE *stream, char separador, char fim_linha);
 
-bool verifyInputDocument(char *doc);
-
 #endif

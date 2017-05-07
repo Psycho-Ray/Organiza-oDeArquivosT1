@@ -4,17 +4,19 @@
 #include <stdbool.h>
 #include <string.h>	// strlen
 
+#include <inputFieldMain.h>
 #include <searchFieldMain.h>
 #include <utils.h>
 
 
-t_searchField searchFieldMainMain() {
+t_searchField searchFieldMain() {
 	bool validInput = false;
 	int op = -1;
 	char memError[100] = "em formato não válido digitado. Por favor tente de novo ou digite uma string vazia para abortar\n";
 	t_searchField search;
 	search.fieldType = INVALID;
 	
+	// TODO: explicar como devera ser digitado os inputs com tamanho fixo.
 	while( !validInput) {	
 		while (op >= 0 && op < 9) {
 			// TODO: Reordenar isso
@@ -37,16 +39,23 @@ t_searchField searchFieldMainMain() {
 				return search;
 		}
 	
+		// reads the user input
 		printf("Digite o campo: ");
 		search.fieldType = op;
 		search.query = readLine(stdin, '\n', '\n');
 		
-		// Verifies  if the user choose a fixed sized field, but did not write the correct amount of characters
+		// if the user has decided to abortar
+		if (strlen(search.query) == 0) {
+			search.fieldType = INVALID;
+			return search;
+		}
+		
+		// Verifies  the user input
 		if (op == DOCUMENT && verifyInputDocument(search.query) == false)
 			printf("Documento %s", memError);
-		else if ( (op == DATE_CREATED || op == DATE_UPDATED) && strlen(search.query) != SIZE_TIME ) 
+		else if ( (op == DATE_CREATED || op == DATE_UPDATED) && verifyInputDateAndTime(search.query) == false) 
 			printf("Data %s", memError);
-		else if ( (op == TICKET && strlen(search.query) != SIZE_TICKET))
+		else if ( op == TICKET && verifyInputTicket(search.query) == false)
 			printf("Ticket %s", memError);
 		else
 			return search;				 
