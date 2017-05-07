@@ -24,8 +24,11 @@ void searchFieldIndicadorTam(FILE *fp) {
 	fread(&regSize, sizeof(int), 1, fp);
 	/* TODO upoe que guardamos 0 no final do arquivo quando chegamos ao fim dos registros.
 		falar com o Gabriel Cruz sobre como ele implementou. */
-	while(regSize != 0) {
+	while (!feof(fp)) {
 	
+		// read the size of the register
+		fread(&regSize, sizeof(int), 1, fp);
+		
 		/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
 			Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
 			se estiver errado aquele domínio, apenas ler o tamanho do campo e dar fseek.
@@ -82,15 +85,13 @@ void searchFieldIndicadorTam(FILE *fp) {
 			(search.fieldType == TICKET && ticket == atoi(search.query))
 		  ) 
 		{
-			/* TODO: Estou contando quantas vezes acho o valor e imprimindo isso junto, verificar 
-				se isso é uma boa ideia */
+			/* TODO: Modificar a impressão par ficar bonitinho */
 			printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, ++count, ticket);
 			found = true;
 		}
-		fread(&regSize, sizeof(int), 1, fp);
 		
 	}
 	if(!found)
-	printf("Campo não encontrado em nenhum registro do arquivo.\n");
+		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");
 }
