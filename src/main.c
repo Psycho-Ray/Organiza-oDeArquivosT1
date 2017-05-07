@@ -8,6 +8,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <utils.h>
+#include <printFixo.h>
+#include <printDelimitador.h>
+#include <printTamanho.h>
 
 void printMenu() {
     printf("1 - Ler a partir do arquivo\n");
@@ -56,12 +59,16 @@ int main(int argc, char *argv[]) {
 				        printf("%s", placeholder);
 				        break;
 				    case PRINT_ALL:
-				        printf("%s", placeholder);
-				        break;
-				    case SEARCH_BY_FIELD:
-				        printf("%s", placeholder);
+				        // Precisa de um ponteiro para o arquivo de registros e a quantidade de registros
+						// void size_printDataBase(FILE *fp, int n);
+				        printf("Done");
 				        break;
 				    case SEARCH_BY_RECORD:
+						// Precisa de um ponteiro para o arquivo de registros, a quantidade de registros e qual se deseja procurar
+						// void size_printRecord(FILE *fp, int n, int offset);
+				        printf("Done");
+				        break;
+				    case SEARCH_BY_FIELD:
 					    printf("%s", placeholder);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
@@ -81,12 +88,16 @@ int main(int argc, char *argv[]) {
 				        printf("%s", placeholder);
 				        break;
 				    case PRINT_ALL:
-				        printf("%s", placeholder);
-				        break;
-				    case SEARCH_BY_FIELD:
-				        printf("%s", placeholder);
+				    	// Precisa de um ponteiro para o arquivo de registros e a quantidade de registros 
+				    	// void delimiter_printDataBase(FILE *fp, int n);
+				        printf("Done");
 				        break;
 				    case SEARCH_BY_RECORD:
+				    	// Precisa de um ponteiro para o arquivo de registros, a quantidade de registros e qual se deseja procurar
+						// void delimiter_printRecord(FILE *fp, int n, int offset);
+				        printf("Done");
+				        break;
+				    case SEARCH_BY_FIELD:
 					    printf("%s", placeholder);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
@@ -106,12 +117,18 @@ int main(int argc, char *argv[]) {
 				        printf("%s", placeholder);
 				        break;
 				    case PRINT_ALL:
-				        printf("%s", placeholder);
-				        break;
-				    case SEARCH_BY_FIELD:
-				        printf("%s", placeholder);
+				    	// Precisa de uma struct RECORD_SIZE com o tamanho de cada campo e o do registro nela
+				    	// de um ponteiro para o arquivo de registros e a quantidade de registros
+				    	// void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n);
+				        printf("Done");
 				        break;
 				    case SEARCH_BY_RECORD:
+				    	// Precisa de uma struct RECORD_SIZE com o tamanho de cada campo e o do registro nela
+				    	// de um ponteiro para o arquivo de registros, quantidade de registros e o offset
+				    	// void fixed_printRecord(RECORD_SIZE *size, FILE *fp, int n, int offset);
+				        printf("Done");
+				        break;
+				    case SEARCH_BY_FIELD:
 					    printf("%s", placeholder);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
