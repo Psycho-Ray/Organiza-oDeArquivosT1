@@ -11,9 +11,12 @@
 #define SIZE_DOCUMENT 19
 #define SIZE_TIME 19
 #define SIZE_TICKET 4
+#define SIZE_FIXED 30
 
 
 typedef struct {
+    int dataSize[8];
+    char **data;
 	char *domain;
 	char *document_number;
 	char *name;
@@ -69,9 +72,15 @@ typedef enum {
 
 void printField(char *name, char *domain, char *document_number, char *city, 
 				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket);
-				
+
 char *readLine(FILE *stream, char separador, char fim_linha);
 
 bool verifyInputDocument(char *doc);
+
+t_field readRecord(FILE *input);
+
+void printRecord(t_field field);
+
+void freeRecord(t_field field);
 
 #endif

@@ -7,17 +7,18 @@
 #include <utils.h>
 
 
-// TODO: Simplificar a readLine, não precisa ter um seprados e um fim_linha.
+// TODO: Simplificar a readLine, não precisa ter um seprador e um fim_linha.
 // TODO: Traduzir para inglês.
 char *readLine(FILE *stream, char separador, char fim_linha) {
     /* Le de um stream um input até encontrar o char separador,  fim_linha ou ser o fim do arq.
     Alocamos 50 bytes pra o input, e caso passe disso, incrementamos de 50 em 50 até ter toda a mensagem. 
     Depois, eliminamos bytes desnecessários */
-    int i, realloc_count=0; //realloc_count guarda a qtd de reallocs ja feitos
+    int i = 0, realloc_count = 0; //realloc_count guarda a qtd de reallocs ja feitos
     char letra, *string;
     string = (char *) malloc(50 * sizeof(char));
     letra = fgetc(stream);
-    i=0;
+
+
     while (letra != separador && letra != fim_linha && letra != EOF) { 
         //leia até o usario pressionar separador, fim_lina ou ser o fim do arquivo
         string[i] = letra;
@@ -34,7 +35,7 @@ char *readLine(FILE *stream, char separador, char fim_linha) {
     return string;
 }
 
-
+// TODO: pode ser simplificada, receber um char **fields e iterar sobre ele, acredito que fique mais elegante // ltkills
 void printField(char *name, char *domain, char *document_number, char *city, 
 				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket) {
 				
@@ -77,3 +78,35 @@ bool verifyInputDocument(char *doc) {
 // TODO: Criar os outros verificadores para os campos de tamanho fixo.
 
 
+
+
+/*Loads the record into t_field struct*/
+t_field readRecord(FILE *input) {
+    char *string;
+    t_field field;
+    field.data = malloc(sizeof(char *)*8);
+
+    for(int i = 0; i < 8; i++) {
+        string = readLine(input, ';', '\n');
+        field.data[i] = string;
+        field.dataSize[i] = strlen(string) + 1; // strlen(string) + \0
+    }
+
+    return field;
+}
+
+
+void freeRecord(t_field field) {
+    int i;
+    for(i = 0; i < 8; i++) free(field.data[i]);
+    free(field.data);
+}
+
+/*==========TEST AND DEBUGGING FUNCTIONS==========*/
+
+void printRecord(t_field field) {
+
+    for(int i = 0; i < 8; i++)
+        printf("%s;", field.data[i]);
+    printf("#\n");
+}
