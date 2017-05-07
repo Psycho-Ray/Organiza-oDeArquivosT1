@@ -12,7 +12,7 @@ Especificado no PDF.
 Ver o PDF pois tem váris especificações não citadas aqui.
 
 1. Leitura e gravação de registros (LTKills) - [2]
-2. Impressão de todos os registros + task 1 - [3] e [5]
+2. Impressão de todos os registros + task 1 (martchellop) - [3] e [5]
 3. Impressão de um registro procurando um campo (BrunoGomesCoelho) - [4]
 4. Impressão de registro de offset X e campo Y desse registro - [6]
 
