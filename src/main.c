@@ -10,6 +10,7 @@
 #include <utils.h>
 #include <printFixo.h>
 #include <printDelimitador.h>
+#include <readDelimitador.h>
 #include <printTamanho.h>
 
 void printMenu() {
@@ -21,21 +22,16 @@ void printMenu() {
     printf("6 - Sair\n");
 }
 
-FTYPE getFileType() {
-    FTYPE a = NONE;
-    // pede o tipo de arquivo
-    return a;
-}
-
-void closeFiles() {
-    // fcloses and frees
+void closeFiles(FILE *input, FILE *output) {
+    fclose(input);
+    fclose(output);
 }
 
 int main(int argc, char *argv[]) {
     OPTION op = NONE;
     TYPE_REG regType = NONE;
-    //FTYPE ftype = getFileType();
-    // FILE *fp = NULL;
+    FILE *input = fopen("Dominios.csv", "r+"), *output;
+    int nregs, nfields;
     
     while (regType < 1 || regType > 3) {
         printf("Digite 1 para registros de tamanho variável com indicador de tamanho\n");
@@ -75,7 +71,7 @@ int main(int argc, char *argv[]) {
 				    	printf("%s", placeholder);
 				        break;
 				    case EXIT:
-				        closeFiles(); // fclose and frees
+				        closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
 				        printf("Opcao Invalida\n");
@@ -85,6 +81,7 @@ int main(int argc, char *argv[]) {
 			case DELIMITER:
 				switch(op) {
 				    case READ_FROM_FILE:
+                        output = delimiter_readDataBase(input, &nregs, &nfields);
 				        printf("%s", placeholder);
 				        break;
 				    case PRINT_ALL:
@@ -104,7 +101,7 @@ int main(int argc, char *argv[]) {
 				    	printf("%s", placeholder);
 				        break;
 				    case EXIT:
-				        closeFiles(); // fclose and frees
+				        closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
 				        printf("Opcao Invalida\n");
@@ -135,7 +132,7 @@ int main(int argc, char *argv[]) {
 				    	printf("%s", placeholder);
 				        break;
 				    case EXIT:
-				        closeFiles(); // fclose and frees
+				        closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
 				        printf("Opcao Invalida\n");
@@ -143,6 +140,6 @@ int main(int argc, char *argv[]) {
 				}
 		}
     }
-
+    //closeFiles(input, output);
     return 0;
 }
