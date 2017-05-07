@@ -89,13 +89,8 @@ t_field readRecord(FILE *input) {
     for(int i = 0; i < 8; i++) {
         string = readLine(input, ';', '\n');
         field.data[i] = string;
-        field.dataSize[i] = strlen(string) + 1; // strlen(string) + \0 + ;
+        field.dataSize[i] = strlen(string) + 1; // strlen(string) + \0
     }
-
-    // fixes sizes of these fields
-    field.dataSize[1] = field.dataSize[5] =
-        field.dataSize[6] = field.dataSize[7] = SIZE_FIXED;
-
 
     return field;
 }
@@ -107,10 +102,11 @@ void freeRecord(t_field field) {
     free(field.data);
 }
 
+/*==========TEST AND DEBUGGING FUNCTIONS==========*/
 
-void printRecord(t_field field) { // for debbuging
+void printRecord(t_field field) {
 
-    for(int i = 0; i < 8; i++) 
+    for(int i = 0; i < 8; i++)
         printf("%s;", field.data[i]);
     printf("#\n");
 }

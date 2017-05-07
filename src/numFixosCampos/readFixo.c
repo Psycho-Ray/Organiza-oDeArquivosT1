@@ -15,11 +15,9 @@
 
 */
 
-
-
-FILE *delimiter_readDataBase(FILE *input, int *nregs, int *nfields) {
+FILE *fixed_readDataBase(FILE *input, int *nregs, int *nfields) {
     FILE *output = fopen("answer.dat", "wb");
-    char regDelim = '#', zeroe[30] = "000000000000000000000000000000";
+    char zeroe[30] = "000000000000000000000000000000";
     int i;
     t_field field;
     *nfields = 8;
@@ -29,17 +27,16 @@ FILE *delimiter_readDataBase(FILE *input, int *nregs, int *nfields) {
         field = readRecord(input);
         if(feof(input)) break;
 
+        // Write record
         for(i = 0; i < (*nfields); i++) {
             if(i == 2 || i == 3 || i == 4 || i == 0) // if variable-sized field
                 fwrite(&field.dataSize[i], sizeof(int), 1, output);
 
             fwrite(field.data[i], sizeof(char), field.dataSize[i], output); // writes the string
 
-            if(i == 1 || i == 5 || i == 6 || i == 7) // if we need to fill with zeroes
+            if(i == 1 || i == 5 || i == 6 || i == 7) // if we need to fill with zeroes (for fixed-size fields)
                 fwrite(zeroe, sizeof(char), SIZE_FIXED - (field.dataSize[i]), output);
         }
-        fwrite(&regDelim, sizeof(char), 1, output); // puts register delimiter
-
         freeRecord(field);
     }
 

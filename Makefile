@@ -6,30 +6,33 @@ CFLAGS = -g -Wall
 SRCS= src/main.c src/indicadorTamanho/* src/delimitador/*  src/numFixosCampos/* src/utils.c
 INCLUDE=./include
 EXEC=trabalho
+OUTPUT=answer.dat
 
 ###############################################################################
 
-all: compile
+all:
+	make clear
+	make compile
 
 compile:
 	$(CC) $(CFLAGS) -I$(INCLUDE) $(SRCS) -o $(EXEC)
 
 run: $(EXEC)
 	./$(EXEC)
-	
-	
-############ FOR DEBUGGIN ONLY, REMOVE LATER ############ 
+
+
+############ FOR DEBUGGING ONLY, REMOVE LATER ############
 # Remove "-g" from CFLAGS, only necessary for valgrind.
 # VALFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
 # just a test
 
 val: $(EXEC)
 	valgrind $(VALFLAGS) ./$(EXEC)
-	
-clean:
-	rm $(EXEC)
-	
+
+clear:
+	rm $(EXEC) $(OUTPUT)
+
 # Bruno usa isso
-open:	
+open:
 	gedit Makefile $(SRCS) $(include)/*
 
