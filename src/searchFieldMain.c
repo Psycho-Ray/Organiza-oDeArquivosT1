@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <utils.h>
 #include <stdbool.h>
-#include <string.h>
+#include <string.h>	// strlen
 
 #include <searchFieldMain.h>
 #include <utils.h>
@@ -40,15 +40,6 @@ t_searchField searchFieldMainMain() {
 		printf("Digite o campo: ");
 		search.fieldType = op;
 		search.query = readLine(stdin, '\n', '\n');
-		
-		switch(op) {
-			case DOCUMENT:
-				if ( !verifyInputDocument(search.query) );
-					printf("Documento %s", memError);
-				break;
-			case DATE_CREATED
-
-		}
 		
 		// Verifies  if the user choose a fixed sized field, but did not write the correct amount of characters
 		if (op == DOCUMENT && verifyInputDocument(search.query) == false)
