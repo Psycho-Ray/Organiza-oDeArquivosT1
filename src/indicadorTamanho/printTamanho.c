@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include <utils.h>
-#include <readFieldIndicadorTam.h>
+#include <readTamanho.h>
 
 /*
 	
@@ -14,7 +14,7 @@
 	5 uf 				string
 	6 dataHora 			string
 	7 dataHoraAtuli 	string
-	8 ticket 			int 
+	8 ticket 			string
 
 */
 
@@ -23,8 +23,8 @@ void size_printDataBase(FILE *fp, int n) {
 	int i;
 
 	for (i = 0; i < n; i++) {
-		field = readFieldindicadorTamanho(fp);
- 
+//		field = readFieldindicadorTamanho(fp);
+
 		// Print the information
 		printf("\t%d - %s\n", i, field.name);
 		printf("\t\t\tDomain: \t%s\n", field.domain);
@@ -35,7 +35,7 @@ void size_printDataBase(FILE *fp, int n) {
 		printf("\t\t\tDate and time last updated: \t%s\n", field.dateTimeUpd);
 		printf("\t\t\tTicket number: \t%d\n", field.ticket);
 
-		freeFieldIndicadorTamanho(field);
+	//	freeFieldIndicadorTamanho(field);
 	}
 
 	// Make the file pointer return to the begging of the file
@@ -61,14 +61,14 @@ void size_printRecord(FILE *fp, int n, int offset) {
 		fseek(fp, register_size, SEEK_CUR);
 	}
 
-	field = readFieldindicadorTamanho(fp);
+//	field = readFieldindicadorTamanho(fp); => JUST FOR NOT BREAKING THE CODE
 
 	// Print the information
 	printField(field.name, field.domain, field.document_number, field.city, field.state, 
 				field.dateTimeOri, field.dateTimeUpd, offset, field.ticket);
 
 	// frees the strings
-	freeFieldIndicadorTamanho(field);
+//	freeFieldIndicadorTamanho(field);
 	
 	// Make the file pointer return to the begging of the file
 	rewind(fp);

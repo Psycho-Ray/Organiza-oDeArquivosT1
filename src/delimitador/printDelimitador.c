@@ -48,14 +48,14 @@ void delimiter_printDataBase(FILE *fp, int n) {
 				record_counter++;
 				continue;
 			}
-			
+
 			// If it's a field delimiter, update the field
 			if (aux == ';') {
 				field++;
 				leng = 0;
 				continue;
 			}
-			
+
 			// Read's the domain
 			if (field == 1) {
 				domain = (char *) realloc(domain, sizeof(char) * (leng + 1));
