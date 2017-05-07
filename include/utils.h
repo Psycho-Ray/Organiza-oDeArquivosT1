@@ -13,6 +13,18 @@
 #define SIZE_TICKET 4
 
 
+typedef struct {
+	char *domain;
+	char *document_number;
+	char *name;
+	char *city;
+	char *state;
+	char *dateTimeOri;
+	char *dateTimeUpd;
+	int ticket;
+} t_field;
+
+
 enum {
 	INVALID,
 	DOMAIN,
