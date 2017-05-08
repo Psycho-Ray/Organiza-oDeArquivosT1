@@ -12,100 +12,40 @@
 	5 uf 				string
 	6 dataHora 			string
 	7 dataHoraAtuli 	string
-	8 ticket 			int 
+	8 ticket 			string
 
 */
 
-// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar 
-// Bruno
+void fixed_printDataBase(FILE *fp, int n) {
+	t_field aux; 
+	int i; 
 
-/*void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n) {
-	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
-	char *dateTimeUpd;
-	int ticket, i;
-
+	// Read every record
 	for (i = 0; i < n; i++) {
 
-		// Malloc the strings 
-		domain = (char *) malloc(sizeof(char) * size->domain_size); 
-		document_number = (char *) malloc(sizeof(char) 
-			* size->document_number_size);
-		name = (char *) malloc(sizeof(char) * size->name_size); 
-		city = (char *) malloc(sizeof(char) * size->city_size);
-		state = (char *) malloc(sizeof(char) * size->state_size);
-		dateTimeOri = (char *) malloc(sizeof(char) * size->dateTimeOri_size);
-		dateTimeUpd = (char *) malloc(sizeof(char) * size->dateTimeUpd_size);
+		// Read the fields
+		aux = readFieldindicadorTamanho(fp);
 
-		// Read the field
-		fread(domain, sizeof(char), size->domain_size, fp);
-		fread(document_number, sizeof(char), size->document_number_size, fp);
-		fread(name, sizeof(char), size->name_size, fp);
-		fread(city, sizeof(char), size->city_size, fp);
-		fread(state, sizeof(char), size->state_size, fp);
-		fread(dateTimeOri, sizeof(char), size->dateTimeOri_size, fp);
-		fread(dateTimeUpd, sizeof(char), size->dateTimeUpd_size, fp);
-		fread(&ticket, sizeof(int), 1, fp);
-
-		// Print the field
-		printField(name, domain, document_number, city, state, dateTimeOri, 
-			dateTimeUpd, i, ticket);
-
-		// Free the strings
-		free(name);
-		free(domain);
-		free(document_number);
-		free(city);
-		free(state);
-		free(dateTimeOri);
-		free(dateTimeUpd);
-
+		// Print them
+		printField(aux, i);
 	}
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-}*/
-/*
-void fixed_printRecord(RECORD_SIZE *size, FILE *fp, int n, int offset) {
-	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
-	char *dateTimeUpd;
-	int ticket;
+}
+
+void fixed_printRecord(FILE *fp, int n, int offset) {
+	t_field aux;
 
 	// Go to the offset-th record
-	fseek(fp, size->record_size * offset, SEEK_SET);
+	fseek(fp, calculateRecordSize(aux) * offset, SEEK_SET);
 
-	// Malloc the strings 
-	domain = (char *) malloc(sizeof(char) * size->domain_size); 
-	document_number = (char *) malloc(sizeof(char) 
-		* size->document_number_size);
-	name = (char *) malloc(sizeof(char) * size->name_size); 
-	city = (char *) malloc(sizeof(char) * size->city_size);
-	state = (char *) malloc(sizeof(char) * size->state_size);
-	dateTimeOri = (char *) malloc(sizeof(char) * size->dateTimeOri_size);
-	dateTimeUpd = (char *) malloc(sizeof(char) * size->dateTimeUpd_size);
+	// Read the fields
+	aux = readFieldindicadorTamanho(fp);
 
-	// Read the field
-	fread(domain, sizeof(char), size->domain_size, fp);
-	fread(document_number, sizeof(char), size->document_number_size, fp);
-	fread(name, sizeof(char), size->name_size, fp);
-	fread(city, sizeof(char), size->city_size, fp);
-	fread(state, sizeof(char), size->state_size, fp);
-	fread(dateTimeOri, sizeof(char), size->dateTimeOri_size, fp);
-	fread(dateTimeUpd, sizeof(char), size->dateTimeUpd_size, fp);
-	fread(&ticket, sizeof(int), 1, fp);
-
-	// Print the field
-	printField(name, domain, document_number, city, state, dateTimeOri, 
-	dateTimeUpd, offset, ticket);
-
-	// Free the strings
-	free(name);
-	free(domain);
-	free(document_number);
-	free(city);
-	free(state);
-	free(dateTimeOri);
-	free(dateTimeUpd);
+	// Print them
+	printField(aux, offset);
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-} */
+} 

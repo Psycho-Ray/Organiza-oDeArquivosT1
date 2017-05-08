@@ -76,6 +76,10 @@ void printField(t_field field, int ticket);
 
 char *readLine(FILE *stream, char separador, char fim_linha);
 
+t_field readFieldindicadorTamanho(FILE *fp);
+
+int calculateRecordSize(t_field field);
+
 bool verifyInputDocument(char *doc);
 
 t_field readRecord(FILE *input);

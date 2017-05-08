@@ -16,19 +16,6 @@
 
 */
 
-int calculateRecordSize(t_field field) {
-    int regSize = 0, i;
-
-    for(i = 0; i < 8; i++) {
-        if(i == 2 || i == 3 || i == 4 || i == 0) // if variable-sized field
-            regSize += field.dataSize[i];
-        else
-            regSize += SIZE_FIXED;
-    }
-
-    return regSize;
-}
-
 
 FILE *size_readDataBase(FILE *input, int *nregs, int *nfields) {
     FILE *output = fopen("answer.dat", "wb");

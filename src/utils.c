@@ -87,6 +87,20 @@ t_field readFieldindicadorTamanho(FILE *fp) {
     return field;
 }
 
+int calculateRecordSize(t_field field) {
+    int regSize = 0, i;
+
+    for(i = 0; i < 8; i++) {
+        if(i == 2 || i == 3 || i == 4 || i == 0) // if variable-sized field
+            regSize += field.dataSize[i];
+        else
+            regSize += SIZE_FIXED;
+    }
+
+    return regSize;
+}
+
+
 
 /* TODO: pode ser simplificada, receber um char **fields e iterar sobre ele, acredito que fique mais elegante // ltkills
 	TODO CONTINUADO: Sei que não era bem isso que queria mas coloquei a struct field porque podemos querer imprimir com tabs diferentes
@@ -110,7 +124,6 @@ void printField(t_field field, int offset) {
 	if (strcmp(field.ticket, "null"))
 		printf("\t\t\tTicket number: \t%s\n", field.ticket);
 }
-
 
 /*Loads the record into t_field struct*/
 t_field readRecord(FILE *input) {
