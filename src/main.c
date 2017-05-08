@@ -71,7 +71,8 @@ int main(int argc, char *argv[]) {
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
-					    size_searchField(input);
+				    	// ponteiro para o arquivo e a qtd de registros
+					    // size_searchField(input, n);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
@@ -101,7 +102,8 @@ int main(int argc, char *argv[]) {
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
-					    delimiter_searchField(input);
+				    	// ponteiro para o arquivo e a qtd de registros
+					    // delimiter_searchField(input, n);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
@@ -133,8 +135,8 @@ int main(int argc, char *argv[]) {
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
-				    	// precisa so do input :)
-					    fixed_searchField(input);
+				    	// ponteiro para o arquivo e a qtd de registros
+					    // fixed_searchField(input, n);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);

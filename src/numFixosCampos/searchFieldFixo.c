@@ -9,12 +9,11 @@
 #include <searchFieldMain.h>
 
 
-void fixed_searchField(FILE *fp) {
+void fixed_searchField(FILE *fp, int n) {
 	t_searchField search;
 	t_field field;
 	bool found = false;
-	int count;
-	char c;
+	int i;
 	
 	// Gets the field to be searched from the user
 	search = searchFieldMain();
@@ -26,11 +25,7 @@ void fixed_searchField(FILE *fp) {
 		return;
 	}
 
-	while (!feof(fp)) {
-	    fread(&c, sizeof(char), 1, fp);
-	    
-	    if (!feof(fp)) {
-	        fseek(fp, -1, SEEK_CUR);
+	for (i = 0; i < n; i++) {
 		
 			/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
 				Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
@@ -46,13 +41,12 @@ void fixed_searchField(FILE *fp) {
 			// Verifies if its the field the user is looking for, with the corrects contents
 			if( searchFound(search, field)) {
 				/* TODO: Modificar a impressão par ficar bonitinho, acho que o count não faz sentido */
-				printField(field, ++count);
+				printField(field, i);
 				found = true;
 			}		
 			
 			// Frees used memory
 			freeFields(field);
-		}
 	}
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
@@ -60,5 +54,4 @@ void fixed_searchField(FILE *fp) {
 	// frees used memory
 	free(search.query);
 }
-
 

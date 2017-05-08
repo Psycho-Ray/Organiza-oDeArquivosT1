@@ -14,8 +14,9 @@ void delimiter_searchField(FILE *fp) {
 	t_searchField search;
 	t_field field;
 	bool found = false;
-	char c;
-	int count;
+	char delim;
+	int i;
+	
 	
 	// Gets the field to be searched from the user
 	search = searchFieldMain();
@@ -26,33 +27,31 @@ void delimiter_searchField(FILE *fp) {
 		return;
 	}
 
-	while (!feof(fp)) {
-	    fread(&c, sizeof(char), 1, fp);
-	    
-	    if (!feof(fp)) {
-	        fseek(fp, -1, SEEK_CUR);
+	for(i = 0; !feof(fp); i++){
 		
-			/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
-				Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
-				se estiver errado aquele domínio, apenas ler o tamanho do campo e dar fseek.
-				Mas isso envolveria implementar 8 ifs diferente, muuuitos iguais....
-				Posso deixar assim e mencionar isso no relatório? 
-			*/
-			// TODO: Supoe que guardamos o \0 na string
+		/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
+			Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
+			se estiver errado aquele domínio, apenas ler o tamanho do campo e dar fseek.
+			Mas isso envolveria implementar 8 ifs diferente, muuuitos iguais....
+			Posso deixar assim e mencionar isso no relatório? 
+		*/
+		// TODO: Supoe que guardamos o \0 na string
 
-			// Reads a field
-			field = readFields(fp);
+		// Reads a field
+		field = readFields(fp);
+	
+		// Verifies if its the field the user is looking for, with the corrects contents
+		if( searchFound(search, field)) {
+			/* TODO: Modificar a impressão par ficar bonitinho, acho que o count não faz sentido */
+			printField(field, i);
+			found = true;
+		}		
 		
-			// Verifies if its the field the user is looking for, with the corrects contents
-			if( searchFound(search, field)) {
-				/* TODO: Modificar a impressão par ficar bonitinho, acho que o count não faz sentido */
-				printField(field, ++count);
-				found = true;
-			}		
-			
-			// Frees used memory
-			free(search.query);
-		}
+		// Read the delimiter
+		fread(&delim, sizeof(int), 1, fp);
+		
+		// Frees used memory
+		free(search.query);
 	}
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");

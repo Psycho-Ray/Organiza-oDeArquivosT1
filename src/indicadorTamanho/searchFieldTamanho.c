@@ -10,12 +10,11 @@
 #include <searchFieldMain.h>
 
 
-void size_searchField(FILE *fp) {
+void size_searchField(FILE *fp, int n) {
 	t_searchField search;
 	t_field field;
 	bool found = false;
-	char c;
-	int count;
+	int i, record_size;
 	
 	// Gets the field to be searched from the user
 	search = searchFieldMain();
@@ -26,8 +25,9 @@ void size_searchField(FILE *fp) {
 		return;
 	}
 
-	while (!feof(fp)) {
-	    fread(&c, sizeof(char), 1, fp);
+	for (i = 0; i < n; i++) {
+	
+		fread(&record_size, sizeof(int), 1, fp);
 	    
 	    if (!feof(fp)) {
 	        fseek(fp, -1, SEEK_CUR);
@@ -46,7 +46,7 @@ void size_searchField(FILE *fp) {
 			// Verifies if its the field the user is looking for, with the corrects contents
 			if( searchFound(search, field)) {
 				/* TODO: Modificar a impressão par ficar bonitinho, acho que o count não faz sentido */
-				printField(field, ++count);
+				printField(field, record_size);
 				found = true;
 			}		
 			
