@@ -23,20 +23,23 @@ void size_printDataBase(FILE *fp, int n) {
 	int i, record_size; 
 
 	// Read every record
-	for (i = 0; i < n; i++) {
+	for (i = 0; !feof(fp); i++) {
+		
 		fread(&record_size, sizeof(int), 1, fp);
 
-		// Read the fields
-		aux = readFields(fp);
+		if(!feof(fp)) {
+			// Read the fields
+			aux = readFields(fp);
 
-		// Print them
-		printField(aux, i);
-		
-		// Free the memory
-		freeFields(aux);
-		
-		// Asks the user to press enter to continue
-		userContinue();
+			// Print them
+			printField(aux, i);
+			
+			// Free the memory
+			freeFields(aux);
+			
+			// Asks the user to press enter to continue
+			userContinue();
+		} 
 	}
 
 	// Make the file pointer return to the begging of the file
