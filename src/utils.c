@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <string.h>	// strcmp
 #include <ctype.h> 	// isdigit
-#include <locale.h>
-
 
 #include <utils.h>
 
@@ -118,12 +116,9 @@ int calculateRecordSize(t_field field) {
 
 
 
-/* TODO: pode ser simplificada, receber um char **fields e iterar sobre ele, acredito que fique mais elegante // ltkills
-	TODO CONTINUADO: Sei que não era bem isso que queria mas coloquei a struct field porque podemos querer imprimir com tabs diferentes
-		Acho que assim fica mais fácil para entender também // Cenoura */
+// TODO: como printar acento? ex: brasília....
 void printField(t_field field, int offset) {
 
-	setlocale(LC_ALL, "Portuguese");
 				
 	if (strcmp(field.name, "null")) 
 		printf("\t%d - \t\t%s\n", offset, field.name);

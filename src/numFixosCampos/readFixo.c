@@ -16,7 +16,7 @@
 */
 
 FILE *fixed_readDataBase(FILE *input, int *nregs, int *nfields) {
-    FILE *output = fopen("answer.dat", "wb");
+    FILE *output = fopen("answer.dat", "wb+");
     char zeroe[30] = "000000000000000000000000000000";
     int i;
     t_field field;
@@ -41,6 +41,8 @@ FILE *fixed_readDataBase(FILE *input, int *nregs, int *nfields) {
     }
 
     freeRecord(field);
+
+	rewind(output);
 
     return output;
 }

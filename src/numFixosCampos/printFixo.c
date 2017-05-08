@@ -33,7 +33,7 @@ void fixed_printDataBase(FILE *fp, int n) {
 		freeFields(aux);
 		
 		// Asks the user to press enter to continue
-		// userContinue();
+		userContinue();
 	}
 
 	// Make the file pointer return to the begging of the file
