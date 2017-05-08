@@ -23,25 +23,10 @@ void delimiter_printDataBase(FILE *fp, int n) {
 	char delim;
 	int i;
 
-
-	// comentarios
-	// 2
-
-
-
-	for(i=0; i<4; i++)
-		printf("haha\n");
-
 	for(i = 0; !feof(fp); i++){
 
 		// Read the fields
 		aux = readFields(fp);
-		
-		if (i == 0)
-			printf("aqui: %s\n", aux.domain);
-		
-		fflush(stdout);
-		printf("i eh %d\n", i);
 
 		// Print them
 		printField(aux, i);
@@ -50,7 +35,10 @@ void delimiter_printDataBase(FILE *fp, int n) {
 		freeFields(aux);
 
 		// Read the delimiter
-		fread(&delim, sizeof(int), 1, fp);
+		fread(&delim, sizeof(char), 1, fp);
+		
+		// Asks the user to continue
+		userContinue();
 	}
 
 

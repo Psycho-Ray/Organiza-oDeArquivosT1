@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <string.h>	// strcmp
 #include <ctype.h> 	// isdigit
+#include <locale.h>
+
 
 #include <utils.h>
 
@@ -120,23 +122,25 @@ int calculateRecordSize(t_field field) {
 	TODO CONTINUADO: Sei que não era bem isso que queria mas coloquei a struct field porque podemos querer imprimir com tabs diferentes
 		Acho que assim fica mais fácil para entender também // Cenoura */
 void printField(t_field field, int offset) {
+
+	setlocale(LC_ALL, "Portuguese");
 				
 	if (strcmp(field.name, "null")) 
-		printf("\t%d - %s\n", offset, field.name);
+		printf("\t%d - \t\t%s\n", offset, field.name);
 	if (strcmp(field.domain, "null")) 
-		printf("\t\t\tDomain: \t%s\n", field.domain);
+		printf("\t\t\tDomain: \t\t\t%s\n", field.domain);
 	if (strcmp(field.document_number, "null")) 
-		printf("\t\t\tDocument Number: \t%s\n", field.document_number);
+		printf("\t\t\tDocument Number: \t\t%s\n", field.document_number);
 	if (strcmp(field.city, "null")) 
-		printf("\t\t\tCity: \t%s\n", field.city);
+		printf("\t\t\tCity: \t\t\t\t%s\n", field.city);
 	if (strcmp(field.state, "null")) 
-		printf("\t\t\tState: \t%s\n", field.state);
+		printf("\t\t\tState: \t\t\t\t%s\n", field.state);
 	if (strcmp(field.dateTimeOri, "null")) 
-		printf("\t\t\tDate and time created: \t%s\n", field.dateTimeOri);
+		printf("\t\t\tDate and time created: \t\t%s\n", field.dateTimeOri);
 	if (strcmp(field.dateTimeUpd, "null")) 
 		printf("\t\t\tDate and time last updated: \t%s\n", field.dateTimeUpd);
 	if (strcmp(field.ticket, "null"))
-		printf("\t\t\tTicket number: \t%s\n", field.ticket);
+		printf("\t\t\tTicket number: \t\t\t%s\n", field.ticket);
 }
 
 
