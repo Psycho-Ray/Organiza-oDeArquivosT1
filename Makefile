@@ -22,7 +22,6 @@ run: clear2
 ############ FOR DEBUGGING ONLY, REMOVE LATER ############
 # Remove "-g" from CFLAGS, only necessary for valgrind.
 # VALFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
-VALFLAGS = --vgdb-error=0
 # just a test
 
 val: $(EXEC)

@@ -81,7 +81,7 @@ t_field readFields(FILE *fp) {
 
         // Read the ticket number
         field.ticket = (char *) malloc(sizeof(char) * (SIZE_FIXED));
-        fread(&field.ticket, SIZE_FIXED, 1, fp);  // Indicates the size of a int   
+        fread(field.ticket, SIZE_FIXED, 1, fp);  // Indicates the size of a int   
         
     }
     

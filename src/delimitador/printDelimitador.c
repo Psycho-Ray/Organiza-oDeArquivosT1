@@ -1,8 +1,8 @@
-#include <stdlib.h>
+#include <stdio.h>
 #include <stdio.h>
 #include <string.h>
-#include <utils.h>
 
+#include <utils.h>
 
 /*
 	
@@ -22,6 +22,15 @@ void delimiter_printDataBase(FILE *fp, int n) {
 	t_field aux;
 	char delim;
 	int i;
+
+
+	// comentarios
+	// 2
+
+
+
+	for(i=0; i<4; i++)
+		printf("haha\n");
 
 	for(i = 0; !feof(fp); i++){
 

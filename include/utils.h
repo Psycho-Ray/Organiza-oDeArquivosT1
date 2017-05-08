@@ -2,7 +2,6 @@
 #define _UTILS_H_
 
 #include <stdbool.h>
-#include <utils.h>
 
 
 #define OPTION int
