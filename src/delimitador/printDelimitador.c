@@ -28,19 +28,21 @@ void delimiter_printDataBase(FILE *fp, int n) {
 		// Read the fields
 		aux = readFields(fp);
 
-		// Print them
-		printField(aux, i);
-		
-		// Frees used memory
-		freeFields(aux);
-
-		// Read the delimiter
-		fread(&delim, sizeof(char), 1, fp);
-		
-		// Asks the user to continue
-		userContinue();
+		// If the file is not over yet
+		if (!feof(fp)) {
+			// Print them
+			printField(aux, i);
+				
+			// Frees used memory
+			freeFields(aux);
+			
+			// Read the delimiter
+			fread(&delim, sizeof(char), 1, fp);
+			
+			// Asks the user to continue
+			userContinue();
+		}
 	}
-
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
@@ -54,7 +56,7 @@ void delimiter_printRecord(FILE *fp, int n, int offset) {
 
 	// If the offset isn't valid, just return
 	if (offset < 0 || offset >= n) {
-		printf("Please, request a valid register number\n");
+		printf("Please, request a valid record number\n");
 		return;
 	}
 
@@ -66,7 +68,7 @@ void delimiter_printRecord(FILE *fp, int n, int offset) {
 		freeFields(aux);
 		
 		// Read the delimiter
-		fread(&delim, sizeof(int), 1, fp);
+		fread(&delim, sizeof(char), 1, fp);
 		
 	}
 
