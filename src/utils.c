@@ -15,11 +15,12 @@ char *readLine(FILE *stream, char separador, char fim_linha) {
     Depois, eliminamos bytes desnecessários */
     int i = 0, realloc_count = 0; //realloc_count guarda a qtd de reallocs ja feitos
     char letra, *string;
+    char carriageReturn = '\r';
     string = (char *) malloc(50 * sizeof(char));
     letra = fgetc(stream);
 
 
-    while (letra != separador && letra != fim_linha && letra != EOF) { 
+    while (letra != separador && letra != fim_linha && letra != carriageReturn && letra != EOF) { 
         //leia até o usario pressionar separador, fim_lina ou ser o fim do arquivo
         string[i] = letra;
         i++;
@@ -146,11 +147,16 @@ t_field readRecord(FILE *input) {
     t_field field;
     field.data = malloc(sizeof(char *)*8);
 
+	// TODO: Verificar para os campos de tamanho fixo se a string não é maior que o nosso limite (SIZE_FIXED)
     for(i = 0; i < 8; i++) {
         string = readLine(input, ';', '\n');
         field.data[i] = string;
         field.dataSize[i] = strlen(string) + 1; // strlen(string) + \0
     }
+    
+    // Reading extra \n
+    string = readLine(input, '\n', '\n');
+    free(string);
 
     return field;
 }

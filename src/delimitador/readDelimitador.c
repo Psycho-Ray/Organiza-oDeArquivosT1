@@ -30,8 +30,10 @@ FILE *delimiter_readDataBase(FILE *input, int *nregs, int *nfields) {
         if(feof(input)) break;
 
         for(i = 0; i < (*nfields); i++) {
-            if(i == 2 || i == 3 || i == 4 || i == 0) // if variable-sized field
+            if(i == 0 || i == 2 || i == 3 || i == 4) { // if variable-sized field
                 fwrite(&field.dataSize[i], sizeof(int), 1, output);
+                if (*nregs == 0 && i == 0) printf("%d\n", field.dataSize[i]);
+            }
 
             fwrite(field.data[i], sizeof(char), field.dataSize[i], output); // writes the string
 
