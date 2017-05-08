@@ -24,10 +24,13 @@ void fixed_printDataBase(FILE *fp, int n) {
 	for (i = 0; i < n; i++) {
 
 		// Read the fields
-		aux = readFieldindicadorTamanho(fp);
+		aux = readFields(fp);
 
 		// Print them
 		printField(aux, i);
+		
+		// Frees used memory
+		freeFields(aux);
 	}
 
 	// Make the file pointer return to the begging of the file
@@ -47,10 +50,13 @@ void fixed_printRecord(FILE *fp, int n, int offset) {
 	fseek(fp, calculateRecordSize(aux) * offset, SEEK_SET);
 
 	// Read the fields
-	aux = readFieldindicadorTamanho(fp);
+	aux = readFields(fp);
 
 	// Print them
 	printField(aux, offset);
+	
+	// Frees used memory
+	freeFields(aux);
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);

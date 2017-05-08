@@ -63,3 +63,22 @@ t_searchField searchFieldMain() {
 	return search;
 }
 
+
+bool searchFound(t_searchField search, t_field field) {
+	if( (search.fieldType == DOMAIN && strcmp(field.domain, search.query)) ||
+		(search.fieldType == DOCUMENT && strcmp(field.document_number, search.query)) ||
+		(search.fieldType == NAME && strcmp(field.name, search.query)) ||
+		(search.fieldType == CITY && strcmp(field.city, search.query)) ||
+		(search.fieldType == STATE && strcmp(field.state, search.query)) ||
+		(search.fieldType == DATE_CREATED && strcmp(field.dateTimeOri, search.query)) ||
+		(search.fieldType == DATE_UPDATED && strcmp(field.dateTimeUpd, search.query)) ||
+		(search.fieldType == TICKET && strcmp(field.ticket, search.query))
+	  ) 
+		return true;
+	return false;
+	 
+
+
+}
+
+

@@ -3,6 +3,7 @@
 #include <utils.h>
 
 FILE *size_readDataBase(FILE *input, int *nregs, int *nfields);
+
 t_field readFieldindicadorTamanho(FILE *fp);
 
 #endif

@@ -36,7 +36,7 @@ char *readLine(FILE *stream, char separador, char fim_linha) {
 }
 
 
-t_field readFieldindicadorTamanho(FILE *fp) {
+t_field readFields(FILE *fp) {
     int domain_size, name_size, city_size, state_size;
     t_field field;
     char c; 
@@ -87,6 +87,19 @@ t_field readFieldindicadorTamanho(FILE *fp) {
     return field;
 }
 
+
+void freeFields(t_field field) {
+	free(field.domain);
+	free(field.document_number);
+	free(field.name);
+	free(field.city);
+	free(field.state);
+	free(field.dateTimeOri);
+	free(field.dateTimeUpd);
+	free(field.ticket);
+}
+
+
 int calculateRecordSize(t_field field) {
     int regSize = 0, i;
 
@@ -124,6 +137,7 @@ void printField(t_field field, int offset) {
 	if (strcmp(field.ticket, "null"))
 		printf("\t\t\tTicket number: \t%s\n", field.ticket);
 }
+
 
 /*Loads the record into t_field struct*/
 t_field readRecord(FILE *input) {

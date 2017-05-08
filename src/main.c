@@ -15,7 +15,9 @@
 #include <readFixo.h>
 #include <readDelimitador.h>
 #include <readTamanho.h>
-#include <searchFieldIndicadorTam.h>
+#include <searchFieldTamanho.h>
+#include <searchFieldFixo.h>
+#include <searchFieldDelimitador.h>
 
 void printMenu() {
     printf("1 - Ler a partir do arquivo\n");
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
-					    printf("%s", placeholder);
+					    size_searchField(input);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
@@ -99,7 +101,7 @@ int main(int argc, char *argv[]) {
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
-					    printf("%s", placeholder);
+					    delimiter_searchField(input);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
@@ -132,7 +134,7 @@ int main(int argc, char *argv[]) {
 				        break;
 				    case SEARCH_BY_FIELD:
 				    	// precisa so do input :)
-					    searchFieldIndicadorTam(input);
+					    fixed_searchField(input);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);

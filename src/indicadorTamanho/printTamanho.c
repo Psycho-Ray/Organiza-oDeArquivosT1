@@ -27,10 +27,13 @@ void size_printDataBase(FILE *fp, int n) {
 		fread(&record_size, sizeof(int), 1, fp);
 
 		// Read the fields
-		aux = readFieldindicadorTamanho(fp);
+		aux = readFields(fp);
 
 		// Print them
 		printField(aux, i);
+		
+		// Free the memory
+		freeFields(aux);
 	}
 
 	// Make the file pointer return to the begging of the file
@@ -58,10 +61,13 @@ void size_printRecord(FILE *fp, int n, int offset) {
 	}
 
 	// Read the fields
-	aux = readFieldindicadorTamanho(fp);
+	aux = readFields(fp);
 
 	// Print them
 	printField(aux, i);
+	
+	// Frees used memory
+	freeFields(aux);
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);

@@ -26,10 +26,13 @@ void delimiter_printDataBase(FILE *fp, int n) {
 	for(i = 0; !feof(fp); i++){
 
 		// Read the fields
-		aux = readFieldindicadorTamanho(fp);
+		aux = readFields(fp);
 
 		// Print them
 		printField(aux, i);
+		
+		// Frees used memory
+		freeFields(aux);
 
 		// Read the delimiter
 		fread(&delim, sizeof(int), 1, fp);
@@ -54,17 +57,24 @@ void delimiter_printRecord(FILE *fp, int n, int offset) {
 
 	for (i = 0; i < offset; i++) {
 		// Read the fields
-		aux = readFieldindicadorTamanho(fp);
+		aux = readFields(fp);
 
+		// Frees used memory
+		freeFields(aux);
+		
 		// Read the delimiter
 		fread(&delim, sizeof(int), 1, fp);
+		
 	}
 
 	// Read the fields from the request offset
-	aux = readFieldindicadorTamanho(fp);
+	aux = readFields(fp);
 
 	// Print them
 	printField(aux, i);
+
+	// Frees used memory
+	freeFields(aux);	
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
