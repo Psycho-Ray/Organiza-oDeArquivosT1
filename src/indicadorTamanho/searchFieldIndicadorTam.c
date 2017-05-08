@@ -7,6 +7,9 @@
 #include <searchFieldMain.h>
 
 
+void readFieldIndicadorTam(FILE *fp)
+
+
 void searchFieldIndicadorTam(FILE *fp) {
 	t_searchField search;
 	bool found = false;	
@@ -20,9 +23,7 @@ void searchFieldIndicadorTam(FILE *fp) {
 	// if the user has decided to abort
 	if (search.fieldType == INVALID || strlen(search.query) == 0)
 		return;
-	
-	/* TODO supoe que guardamos 0 no final do arquivo quando chegamos ao fim dos registros.
-		falar com o Gabriel Cruz sobre como ele implementou. */
+
 	while (!feof(fp)) {
 	
 		// read the size of the register
@@ -35,6 +36,39 @@ void searchFieldIndicadorTam(FILE *fp) {
 			Posso deixar assim e mencionar isso no relatório? 
 		*/
 		// TODO: Supoe que guardamos o \0 na string
+
+		// Read's the domain
+		fread(&domain_size, sizeof(int), 1, fp);
+		domain = (char *) malloc(sizeof(char) * (domain_size));
+		fread(domain, sizeof(char), domain_size, fp);
+		
+		// Read's the document number
+		document_number = (char *) malloc(sizeof(char) * (SIZE_DOCUMENT));
+		fread(document_number, sizeof(char), document_number_size, fp);
+
+		// Read's the name 
+		fread(&name_size, sizeof(int), 1, fp);
+		name = (char *) malloc(sizeof(char) * (name_size));
+		fread(name, sizeof(char), name_size, fp);
+
+		// Read's the city name
+		fread(&city_size, sizeof(int), 1, fp);
+		city = (char *) malloc(sizeof(char) * (city_size));
+		fread(city, sizeof(char), city_size, fp);
+
+		// Read's the state name
+		fread(&state_size, sizeof(int), 1, fp);
+		state = (char *) malloc(sizeof(char) * (state_size));
+		fread(state, sizeof(char), state_size, fp);
+
+		// Read's the date and time when the domain was created
+		dateTimeOri = (char *) malloc(sizeof(char) * (dateTimeOri_size));
+		fread(dateTimeOri, sizeof(char), dateTimeOri_size, fp);
+
+		// Read's the date and time of when the file was last modified
+		dateTimeUpd = (char *) malloc(sizeof(char) * (dateTimeUpd_size));
+		fread(dateTimeUpd, sizeof(char), dateTimeUpd_size, fp);
+
 
 		// Read the ticket number
 		fread(&ticket, sizeof(int), 1, fp);  // Indicates the size of a int
