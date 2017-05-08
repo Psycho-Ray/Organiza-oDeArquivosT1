@@ -119,6 +119,7 @@ int calculateRecordSize(t_field field) {
 // TODO: como printar acento? ex: brasília....
 void printField(t_field field, int offset) {
 
+	printf("\n");
 				
 	if (strcmp(field.name, "null")) 
 		printf("\t%d - \t\t%s\n", offset, field.name);
@@ -136,6 +137,7 @@ void printField(t_field field, int offset) {
 		printf("\t\t\tDate and time last updated: \t%s\n", field.dateTimeUpd);
 	if (strcmp(field.ticket, "null"))
 		printf("\t\t\tTicket number: \t\t\t%s\n", field.ticket);
+	printf("\t\t\t========================================================\n\n");
 }
 
 
