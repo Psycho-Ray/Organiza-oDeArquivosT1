@@ -44,10 +44,6 @@ bool verifyInputDateAndTime(char *date) {
 
 
 bool verifyInputTicket(char *ticket) {
-	return true;
-	
-	// TODO: O ticket vai mesmo ser um char então? se sim, considerar o código abaixo
-	/*
 	int i;
 	
 	// verifies the size of the ticket
@@ -55,10 +51,10 @@ bool verifyInputTicket(char *ticket) {
 		return false;
 	
 	// verifies if all the characters are indeed numbers
-	for (i = 0; i < strlen(ti); i += 1) 
+	for (i = 0; i < strlen(ticket); i += 1) 
 		if(!isdigit(ticket[i]))
 			return false;
-	return true; */
+	return true;
 }
 
 

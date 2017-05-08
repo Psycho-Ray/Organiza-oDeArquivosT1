@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+
 #include <utils.h>
 #include <printFixo.h>
 #include <printDelimitador.h>
@@ -14,6 +15,7 @@
 #include <readFixo.h>
 #include <readDelimitador.h>
 #include <readTamanho.h>
+#include <searchFieldIndicadorTam.h>
 
 void printMenu() {
     printf("1 - Ler a partir do arquivo\n");
@@ -129,7 +131,8 @@ int main(int argc, char *argv[]) {
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:
-					    printf("%s", placeholder);
+				    	// precisa so do input :)
+					    searchFieldIndicadorTam(input);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
