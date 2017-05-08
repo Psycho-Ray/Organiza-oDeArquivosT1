@@ -10,25 +10,31 @@ OUTPUT=answer.dat
 
 ###############################################################################
 
-all: compile
+all: clear1 compile
 
 compile:
 	$(CC) $(CFLAGS) -I$(INCLUDE) $(SRCS) -o $(EXEC)
 
-run: $(EXEC)
+run: clear2
 	./$(EXEC)
 
 
 ############ FOR DEBUGGING ONLY, REMOVE LATER ############
 # Remove "-g" from CFLAGS, only necessary for valgrind.
 # VALFLAGS = --leak-check=full --show-leak-kinds=all --track-origins=yes
+VALFLAGS = --vgdb-error=0
 # just a test
 
 val: $(EXEC)
 	valgrind $(VALFLAGS) ./$(EXEC)
 
-clear:
-	rm $(EXEC) $(OUTPUT)
+clear1:
+	# rm $(EXEC) $(OUTPUT)
+	find . -type f -name '*~' -delete
+
+clear2:
+	# rm $(EXEC) $(OUTPUT)
+	# rm "answer.dat"
 
 # Bruno usa isso
 open:

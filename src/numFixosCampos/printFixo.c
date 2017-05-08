@@ -31,6 +31,9 @@ void fixed_printDataBase(FILE *fp, int n) {
 		
 		// Frees used memory
 		freeFields(aux);
+		
+		// Asks the user to press enter to continue
+		// userContinue();
 	}
 
 	// Make the file pointer return to the begging of the file

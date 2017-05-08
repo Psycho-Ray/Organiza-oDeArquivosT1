@@ -34,6 +34,9 @@ void size_printDataBase(FILE *fp, int n) {
 		
 		// Free the memory
 		freeFields(aux);
+		
+		// Asks the user to press enter to continue
+		//userContinue();
 	}
 
 	// Make the file pointer return to the begging of the file

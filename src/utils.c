@@ -47,35 +47,35 @@ t_field readFields(FILE *fp) {
     if (!feof(fp)) {
         fseek(fp, -1, SEEK_CUR);
 
-        // Read's the domain
+        // Reads the domain
         fread(&domain_size, sizeof(int), 1, fp);
         field.domain = (char *) malloc(sizeof(char) * (domain_size));
         fread(field.domain, sizeof(char), domain_size, fp);
         
-        // Read's the document number
+        // Reads the document number
         field.document_number = (char *) malloc(sizeof(char) * (SIZE_FIXED));
         fread(field.document_number, sizeof(char), SIZE_FIXED, fp);
 
-        // Read's the name 
+        // Reads the name 
         fread(&name_size, sizeof(int), 1, fp);
         field.name = (char *) malloc(sizeof(char) * (name_size));
         fread(field.name, sizeof(char), name_size, fp);
 
-        // Read's the city name
+        // Reads the city name
         fread(&city_size, sizeof(int), 1, fp);
         field.city = (char *) malloc(sizeof(char) * (city_size));
         fread(field.city, sizeof(char), city_size, fp);
 
-        // Read's the state name
+        // Reads the state name
         fread(&state_size, sizeof(int), 1, fp);
         field.state = (char *) malloc(sizeof(char) * (state_size));
         fread(field.state, sizeof(char), state_size, fp);
 
-        // Read's the date and time when the domain was created
+        // Reads the date and time when the domain was created
         field.dateTimeOri = (char *) malloc(sizeof(char) * (SIZE_FIXED));
         fread(field.dateTimeOri, sizeof(char), SIZE_FIXED, fp);
 
-        // Read's the date and time of when the file was last modified
+        // Reads the date and time of when the file was last modified
         field.dateTimeUpd = (char *) malloc(sizeof(char) * (SIZE_FIXED));
         fread(field.dateTimeUpd, sizeof(char), SIZE_FIXED, fp);
 
@@ -159,6 +159,22 @@ t_field readRecord(FILE *input) {
     free(string);
 
     return field;
+}
+
+
+void userContinue() {
+	int count = 0;
+	char c = 0;
+	printf("Digite p para o próximo registro\n");
+	while (c != 'p') {
+		count++;
+		c = getchar();
+		if (count == 10) {
+			printf("Você parece estar com dificuldade para pressionar enter.\n");
+			printf("Continuando para o próximo registo\n");
+			break;
+		}
+	}
 }
 
 

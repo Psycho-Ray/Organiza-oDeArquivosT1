@@ -88,6 +88,8 @@ t_field readRecord(FILE *input);
 
 void printRecord(t_field field);
 
+void userContinue();
+
 void freeRecord(t_field field);
 
 #endif

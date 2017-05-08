@@ -27,6 +27,12 @@ void delimiter_printDataBase(FILE *fp, int n) {
 
 		// Read the fields
 		aux = readFields(fp);
+		
+		if (i == 0)
+			printf("aqui: %s\n", aux.domain);
+		
+		fflush(stdout);
+		printf("i eh %d\n", i);
 
 		// Print them
 		printField(aux, i);
