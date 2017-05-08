@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     OPTION op = NONE;
     TYPE_REG regType = NONE;
     FILE *input = fopen("Dominios.csv", "r+"), *output;
-    int nregs, nfields, offset = 0;
+    int nregs, nfields; // offset = 0; variavel nao usado
     
     while (regType < 1 || regType > 3) {
         printf("Digite 1 para registros de tamanho variável com indicador de tamanho\n");
@@ -88,12 +88,12 @@ int main(int argc, char *argv[]) {
 				        break;
 				    case PRINT_ALL:
 				    	// Precisa de um ponteiro para o arquivo de registros e a quantidade de registros 
-				    	delimiter_printDataBase(output, nregs);
+				    	//delimiter_printDataBase(output, nregs); ainda nao implementado
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_RECORD:
 				    	// Precisa de um ponteiro para o arquivo de registros, a quantidade de registros e qual se deseja procurar
-						delimiter_printRecord(output, nregs, offset);
+						// delimiter_printRecord(output, nregs, offset); ainda nao implementado
 				        printf("Done");
 				        break;
 				    case SEARCH_BY_FIELD:

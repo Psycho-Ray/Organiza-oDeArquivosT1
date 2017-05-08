@@ -35,58 +35,38 @@ char *readLine(FILE *stream, char separador, char fim_linha) {
     return string;
 }
 
-// TODO: pode ser simplificada, receber um char **fields e iterar sobre ele, acredito que fique mais elegante // ltkills
-void printField(char *name, char *domain, char *document_number, char *city, 
-				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket) {
+/* TODO: pode ser simplificada, receber um char **fields e iterar sobre ele, acredito que fique mais elegante // ltkills
+	TODO CONTINUADO: Sei que não era bem isso que queria mas coloquei a struct field porque podemos querer imprimir com tabs diferentes
+		Acho que assim fica mais fácil para entender também // Cenoura */
+void printField(t_field field, int offset) {
 				
-	if (strcmp(name, "null")) 
-		printf("\t%d - %s\n", offset, name);
-	if (strcmp(domain, "null")) 
-		printf("\t\t\tDomain: \t%s\n", domain);
-	if (strcmp(document_number, "null")) 
-		printf("\t\t\tDocument Number: \t%s\n", document_number);
-	if (strcmp(city, "null")) 
-		printf("\t\t\tCity: \t%s\n", city);
-	if (strcmp(state, "null")) 
-		printf("\t\t\tState: \t%s\n", state);
-	if (strcmp(dateTimeOri, "null")) 
-		printf("\t\t\tDate and time created: \t%s\n", dateTimeOri);
-	if (strcmp(dateTimeUpd, "null")) 
-		printf("\t\t\tDate and time last updated: \t%s\n", dateTimeUpd);
-	printf("\t\t\tTicket number: \t%d\n", ticket);
+	if (strcmp(field.name, "null")) 
+		printf("\t%d - %s\n", offset, field.name);
+	if (strcmp(field.domain, "null")) 
+		printf("\t\t\tDomain: \t%s\n", field.domain);
+	if (strcmp(field.document_number, "null")) 
+		printf("\t\t\tDocument Number: \t%s\n", field.document_number);
+	if (strcmp(field.city, "null")) 
+		printf("\t\t\tCity: \t%s\n", field.city);
+	if (strcmp(field.state, "null")) 
+		printf("\t\t\tState: \t%s\n", field.state);
+	if (strcmp(field.dateTimeOri, "null")) 
+		printf("\t\t\tDate and time created: \t%s\n", field.dateTimeOri);
+	if (strcmp(field.dateTimeUpd, "null")) 
+		printf("\t\t\tDate and time last updated: \t%s\n", field.dateTimeUpd);
+	if (strcmp(field.ticket, "null"))
+		printf("\t\t\tTicket number: \t%s\n", field.ticket);
 }
-
-
-/* OBS: Quem for ler o input, mantenha-se atento ao fato que qualquer modificação aqui pode resultar em mudanças
-		na verificação do input durante a busca por um campo (Bruno). */
-bool verifyInputDocument(char *doc) {
-	// example of a valid input : 000.394.411/0001-09
-	
-	// Verifies the size of the input and the special characters.
-	if ( strlen(doc) != SIZE_DOCUMENT || doc[3] != '.' || doc[7] != '.' ||
-		 doc[11] != '/' || doc[16] != '-')
-		 	 return false;
-	
-	// Verifies the digits
-	if ( isdigit(doc[0]) && isdigit(doc[1]) && isdigit(doc[2]) && isdigit(doc[4]) && isdigit(doc[5]) && isdigit(doc[6]) &&
-		 isdigit(doc[8]) && isdigit(doc[9]) && isdigit(doc[10]) && isdigit(doc[12]) && isdigit(doc[13]) && isdigit(doc[14]) && 
-		 isdigit(doc[15]) && isdigit(doc[17]) && isdigit(doc[18]) ) return true;
-	return false;
-}
-
-
-// TODO: Criar os outros verificadores para os campos de tamanho fixo.
-
-
 
 
 /*Loads the record into t_field struct*/
 t_field readRecord(FILE *input) {
     char *string;
+    int i;
     t_field field;
     field.data = malloc(sizeof(char *)*8);
 
-    for(int i = 0; i < 8; i++) {
+    for(i = 0; i < 8; i++) {
         string = readLine(input, ';', '\n');
         field.data[i] = string;
         field.dataSize[i] = strlen(string) + 1; // strlen(string) + \0
@@ -105,8 +85,8 @@ void freeRecord(t_field field) {
 /*==========TEST AND DEBUGGING FUNCTIONS==========*/
 
 void printRecord(t_field field) {
-
-    for(int i = 0; i < 8; i++)
+	int i;
+    for(i = 0; i < 8; i++)
         printf("%s;", field.data[i]);
     printf("#\n");
 }

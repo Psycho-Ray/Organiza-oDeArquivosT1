@@ -2,6 +2,8 @@
 #define _UTILS_H_
 
 #include <stdbool.h>
+#include <utils.h>
+
 
 #define OPTION int
 #define TYPE_REG int
@@ -70,8 +72,7 @@ typedef enum {
     // file organization types
 } FTYPE;
 
-void printField(char *name, char *domain, char *document_number, char *city, 
-				char *state, char *dateTimeOri, char *dateTimeUpd, int offset, int ticket);
+void printField(t_field field, int ticket);
 
 char *readLine(FILE *stream, char separador, char fim_linha);
 

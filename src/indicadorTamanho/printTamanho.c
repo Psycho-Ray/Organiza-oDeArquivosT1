@@ -18,6 +18,9 @@
 
 */
 
+// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar // Bruno
+
+/*
 void size_printDataBase(FILE *fp, int n) {
 	t_field field;
 	int i;
@@ -72,4 +75,4 @@ void size_printRecord(FILE *fp, int n, int offset) {
 	
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-}
+} */

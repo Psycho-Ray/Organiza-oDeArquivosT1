@@ -63,3 +63,4 @@ FILE *size_readDataBase(FILE *input, int *nregs, int *nfields) {
 
     return output;
 }
+
