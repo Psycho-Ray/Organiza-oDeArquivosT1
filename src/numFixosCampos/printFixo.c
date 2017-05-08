@@ -16,10 +16,10 @@
 
 */
 
-// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar // Bruno
+// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar 
+// Bruno
 
-/*
-void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n) {
+/*void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n) {
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
 	char *dateTimeUpd;
 	int ticket, i;
@@ -47,7 +47,8 @@ void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n) {
 		fread(&ticket, sizeof(int), 1, fp);
 
 		// Print the field
-		printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, i, ticket);
+		printField(name, domain, document_number, city, state, dateTimeOri, 
+			dateTimeUpd, i, ticket);
 
 		// Free the strings
 		free(name);
@@ -62,8 +63,8 @@ void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n) {
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-}
-
+}*/
+/*
 void fixed_printRecord(RECORD_SIZE *size, FILE *fp, int n, int offset) {
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
 	char *dateTimeUpd;
@@ -93,7 +94,8 @@ void fixed_printRecord(RECORD_SIZE *size, FILE *fp, int n, int offset) {
 	fread(&ticket, sizeof(int), 1, fp);
 
 	// Print the field
-	printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, offset, ticket);
+	printField(name, domain, document_number, city, state, dateTimeOri, 
+	dateTimeUpd, offset, ticket);
 
 	// Free the strings
 	free(name);
