@@ -37,6 +37,12 @@ void fixed_printDataBase(FILE *fp, int n) {
 void fixed_printRecord(FILE *fp, int n, int offset) {
 	t_field aux;
 
+	// If the offset isn't valid, just return
+	if (offset < 0 || offset >= n) {
+		printf("Please, request a valid register number\n");
+		return;
+	}
+
 	// Go to the offset-th record
 	fseek(fp, calculateRecordSize(aux) * offset, SEEK_SET);
 

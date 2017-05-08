@@ -13,107 +13,28 @@
 	5 uf 				string
 	6 dataHora 			string
 	7 dataHoraAtuli 	string
-	8 ticket 			int 
+	8 ticket 			string
 
 */
 
 
-// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar // Bruno
-
-/*
 void delimiter_printDataBase(FILE *fp, int n) {
-	char *domain = NULL, *document_number = NULL, *name = NULL, *city = NULL;
-	char *state = NULL, *dateTimeOri = NULL, *dateTimeUpd = NULL;
-	int ticket, leng = 0, field = 1, record_counter = 0;
-	char aux;
+	t_field aux;
+	char delim;
+	int i;
 
-	// Read until end of file
-	while(!feof(fp)) {
-		fread(&aux, sizeof(char), 1, fp);
-		if(!feof(fp)) {
+	for(i = 0; !feof(fp); i++){
 
-			// If the record is over, print the information
-			if (aux == '#') {
-			printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, record_counter, ticket);
+		// Read the fields
+		aux = readFieldindicadorTamanho(fp);
 
-				// Free the strings
-				free(name);
-				free(domain);
-				free(document_number);
-				free(city);
-				free(state);
-				free(dateTimeOri);
-				free(dateTimeUpd);
+		// Print them
+		printField(aux, i);
 
-				// Set the pointers back to NULL
-				name = domain = document_number = city = state = NULL;
-				dateTimeOri = dateTimeUpd = NULL;
-
-				record_counter++;
-				continue;
-			}
-
-			// If it's a field delimiter, update the field
-			if (aux == ';') {
-				field++;
-				leng = 0;
-				continue;
-			}
-
-			// Read's the domain
-			if (field == 1) {
-				domain = (char *) realloc(domain, sizeof(char) * (leng + 1));
-				domain[leng++] = aux;
-			}
-
-			// Read's the document number
-			if (field == 2) {
-				document_number = (char *) realloc(document_number, 
-					sizeof(char) * (leng+1));
-				document_number[leng++] = aux;
-			}
-
-			// Read's the name 
-			if (field == 3) {
-				name = (char *) realloc(name, sizeof(char) * (leng + 1));
-				name[leng++] = aux;
-			}	
-
-			// Read's the city name
-			if (field == 4) {
-				city = (char *) realloc(city, sizeof(char) * (leng + 1));
-				city[leng++] = aux;
-			}
-
-			// Read's the state name
-			if (field == 5) {
-				state = (char *) realloc(state, sizeof(char) * (leng + 1));
-				state[leng++] = aux;
-			}
-
-			// Read's the date and time when the domain was created
-			if (field == 6) {
-				dateTimeOri = (char *) realloc(dateTimeOri, 
-					sizeof(char) * (leng + 1));
-				dateTimeOri[leng++] = aux;
-			}
-
-			// Read's the date and time of when the file was last modified
-			if (field == 7) {
-				dateTimeUpd = (char *) realloc(dateTimeUpd, 
-					sizeof(char) * (leng + 1));
-				dateTimeUpd[leng++] = aux;
-			}
-
-			// Read the ticket number
-			if (field == 8) {
-				// Already read a byte from the int, needs to go back one byte 
-				fseek(fp, -1, SEEK_CUR);
-				// Read the int
-				fread(&ticket, sizeof(int), 1, fp);
-			}
-		}
+		// Read the delimiter
+		fread(&delim, sizeof(int), 1, fp);
 	}
+
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
@@ -121,107 +42,30 @@ void delimiter_printDataBase(FILE *fp, int n) {
 
 
 void delimiter_printRecord(FILE *fp, int n, int offset) {
-	char *domain = NULL, *document_number = NULL, *name = NULL, *city = NULL;
-	char *state = NULL, *dateTimeOri = NULL, *dateTimeUpd = NULL;
-	int ticket, leng = 0, field = 1, record_counter = 0;
-	char aux;
+	t_field aux;
+	char delim;
+	int i = 0; 
 
 	// If the offset isn't valid, just return
 	if (offset < 0 || offset >= n) {
-		printf("Please, request a valid record number\n");
+		printf("Please, request a valid register number\n");
 		return;
 	}
 
-	while(record_counter != offset) {
-		// Read each byte looking for record delimeters 
-		fread(&aux, sizeof(char), 1, fp);
+	for (i = 0; i < offset; i++) {
+		// Read the fields
+		aux = readFieldindicadorTamanho(fp);
 
-		// If it's a record delimeter, we are in the next record
-		if (aux == '#') record_counter++;  
+		// Read the delimiter
+		fread(&delim, sizeof(int), 1, fp);
 	}
 
+	// Read the fields from the request offset
+	aux = readFieldindicadorTamanho(fp);
 
-	while(!feof(fp)) {
-		fread(&aux, sizeof(char), 1, fp);
-		if(!feof(fp)) {
-
-			// If the record is over, break
-			if (aux == '#') break;
-
-			// If it's a field delimiter, update the field
-			if (aux == ';') {
-				field++;
-				leng = 0;
-				continue;
-			}
-			
-			// Read's the domain
-			if (field == 1) {
-				domain = (char *) realloc(domain, sizeof(char) * (leng + 1));
-				domain[leng++] = aux;
-			}
-
-			// Read's the document number
-			if (field == 2) {
-				document_number = (char *) realloc(document_number, 
-					sizeof(char) * (leng+1));
-				document_number[leng++] = aux;
-			}
-
-			// Read's the name 
-			if (field == 3) {
-				name = (char *) realloc(name, sizeof(char) * (leng + 1));
-				name[leng++] = aux;
-			}	
-
-			// Read's the city name
-			if (field == 4) {
-				city = (char *) realloc(city, sizeof(char) * (leng + 1));
-				city[leng++] = aux;
-			}
-
-			// Read's the state name
-			if (field == 5) {
-				state = (char *) realloc(state, sizeof(char) * (leng + 1));
-				state[leng++] = aux;
-			}
-
-			// Read's the date and time when the domain was created
-			if (field == 6) {
-				dateTimeOri = (char *) realloc(dateTimeOri, 
-					sizeof(char) * (leng + 1));
-				dateTimeOri[leng++] = aux;
-			}
-
-			// Read's the date and time of when the file was last modified
-			if (field == 7) {
-				dateTimeUpd = (char *) realloc(dateTimeUpd, 
-					sizeof(char) * (leng + 1));
-				dateTimeUpd[leng++] = aux;
-			}
-
-			// Read the ticket number
-			if (field == 8) {
-				// Already read a byte from the int, needs to go back one byte 
-				fseek(fp, -1, SEEK_CUR);
-				// Read the int
-				fread(&ticket, sizeof(int), 1, fp);
-			}
-		}
-	}
-
-	// Print the information
-	printField(name, domain, document_number, city, state, dateTimeOri, dateTimeUpd, offset, ticket);
-
-	// Free the strings
-	free(name);
-	free(domain);
-	free(document_number);
-	free(city);
-	free(state);
-	free(dateTimeOri);
-	free(dateTimeUpd);
+	// Print them
+	printField(aux, i);
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-} */
+} 
