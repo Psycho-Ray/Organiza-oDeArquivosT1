@@ -16,6 +16,9 @@
 
 */
 
+// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar // Bruno
+
+/*
 void fixed_printDataBase(RECORD_SIZE *size, FILE *fp, int n) {
 	char *domain, *document_number, *name, *city, *state, *dateTimeOri;
 	char *dateTimeUpd;
@@ -103,4 +106,4 @@ void fixed_printRecord(RECORD_SIZE *size, FILE *fp, int n, int offset) {
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-}
+} */

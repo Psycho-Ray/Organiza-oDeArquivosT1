@@ -17,6 +17,10 @@
 
 */
 
+
+// TODO: Marcelo: Usar a struct t_field, vou deixar comentado enquanto isso para compilar // Bruno
+
+/*
 void delimiter_printDataBase(FILE *fp, int n) {
 	char *domain = NULL, *document_number = NULL, *name = NULL, *city = NULL;
 	char *state = NULL, *dateTimeOri = NULL, *dateTimeUpd = NULL;
@@ -220,4 +224,4 @@ void delimiter_printRecord(FILE *fp, int n, int offset) {
 
 	// Make the file pointer return to the begging of the file
 	rewind(fp);
-}
+} */
