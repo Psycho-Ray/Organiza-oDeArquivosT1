@@ -54,6 +54,7 @@ void searchFieldIndicadorTam(FILE *fp) {
 			found = true;
 		}
 		
+		
 	}
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
