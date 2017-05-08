@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <utils.h>
 
 /*
@@ -14,6 +15,50 @@
 	8 ticket 			string // fixed
 
 */
+
+
+t_field readFieldindicadorTamanho(FILE *fp) {
+	int domain_size, name_size, city_size, state_size;
+	t_field field;
+
+	// Read's the domain
+	fread(&domain_size, sizeof(int), 1, fp);
+	field.domain = (char *) malloc(sizeof(char) * (domain_size));
+	fread(field.domain, sizeof(char), domain_size, fp);
+	
+	// Read's the document number
+	field.document_number = (char *) malloc(sizeof(char) * (SIZE_FIXED));
+	fread(field.document_number, sizeof(char), SIZE_FIXED, fp);
+
+	// Read's the name 
+	fread(&name_size, sizeof(int), 1, fp);
+	field.name = (char *) malloc(sizeof(char) * (name_size));
+	fread(field.name, sizeof(char), name_size, fp);
+
+	// Read's the city name
+	fread(&city_size, sizeof(int), 1, fp);
+	field.city = (char *) malloc(sizeof(char) * (city_size));
+	fread(field.city, sizeof(char), city_size, fp);
+
+	// Read's the state name
+	fread(&state_size, sizeof(int), 1, fp);
+	field.state = (char *) malloc(sizeof(char) * (state_size));
+	fread(field.state, sizeof(char), state_size, fp);
+
+	// Read's the date and time when the domain was created
+	field.dateTimeOri = (char *) malloc(sizeof(char) * (SIZE_FIXED));
+	fread(field.dateTimeOri, sizeof(char), SIZE_FIXED, fp);
+
+	// Read's the date and time of when the file was last modified
+	field.dateTimeUpd = (char *) malloc(sizeof(char) * (SIZE_FIXED));
+	fread(field.dateTimeUpd, sizeof(char), SIZE_FIXED, fp);
+
+	// Read the ticket number
+	field.ticket = (char *) malloc(sizeof(char) * (SIZE_FIXED));
+	fread(&field.ticket, SIZE_FIXED, 1, fp);  // Indicates the size of a int
+	
+	return field;
+}
 
 
 int calculateRecordSize(t_field field) {
