@@ -51,7 +51,7 @@ bool verifyInputTicket(char *ticket) {
 		return false;
 	
 	// verifies if all the characters are indeed numbers
-	for (i = 0; i < strlen(ti); i += 1) 
+	for (i = 0; i < strlen(ticket); i += 1) 
 		if(!isdigit(ticket[i]))
 			return false;
 	return true;
