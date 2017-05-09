@@ -24,6 +24,8 @@
 #include <searchFieldDelimitador.h>
 
 void printMenu() {
+	printf("\n\n");
+	printf("\tEscolha uma das seguintes funções abaixo:\n");
     printf("1 - Ler a partir do arquivo\n");
     printf("2 - Imprimir todos os dados\n");
     printf("3 - Procurar por campo\n");
@@ -41,10 +43,14 @@ int main(int argc, char *argv[]) {
     OPTION op = NONE;
     TYPE_REG regType = NONE;
     FILE *input = fopen("Dominios.csv", "r+"), *output;
+    bool read = false;
     int nregs, nfields; // offset = 0; variavel nao usado
     int offset;
+    char endPrint[37] = "Fim da impressão, voltando ao menu\n\0";
+    char errorAlreadyRead[48] = "Arquivo já lido, abortando e voltando ao menu\n\0";
     
     while (regType < 1 || regType > 3) {
+    	printf("\n");
         printf("Digite 1 para registros de tamanho variável com indicador de tamanho\n");
 	    printf("Digite 2 para registros de tamanho variável com delimitadores entre registros\n");
 	    printf("Digite 3 para registros de tamanho variável com número fixo de campos\n");
@@ -65,11 +71,17 @@ int main(int argc, char *argv[]) {
         	case SIZE_INDICATOR:
 				switch(op) {
 				    case READ_FROM_FILE:
-                        output = size_readDataBase(input, &nregs, &nfields);
+				    	// if the file has already been read, abort
+				    	if (read) 
+				    		printf("%s", errorAlreadyRead);
+				    	else {
+	                        output = size_readDataBase(input, &nregs, &nfields);
+	                        read = true;
+                        }
 				        break;
 				    case PRINT_ALL:
 						size_printDataBase(output, nregs);
-				        printf("Done\n");
+				        printf("%s\n\n", endPrint);
 				        break;
 				    case SEARCH_BY_RECORD:
 						printf("Digite qual o numero do registro procurado\n"); 
@@ -78,7 +90,7 @@ int main(int argc, char *argv[]) {
 				        break;
 				    case SEARCH_BY_FIELD:
 				    	// ponteiro para o arquivo e a qtd de registros
-					    // size_searchField(output, nregs);
+					    size_searchField(output, nregs);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
@@ -87,7 +99,7 @@ int main(int argc, char *argv[]) {
 				        //closeFiles(input, output); // fclose and frees
 				        break;
 				    default:
-				        printf("Opcao Invalida\n");
+				        printf("Opcao Invalida, voltando ao menu\n");
 				        break;
 				}
                 break;
@@ -95,10 +107,17 @@ int main(int argc, char *argv[]) {
 			case DELIMITER:
 				switch(op) {
 				    case READ_FROM_FILE:
-                        output = delimiter_readDataBase(input, &nregs, &nfields);
+				    	// if the file has already been read, abort
+				    	if (read) 
+				    		printf("%s", errorAlreadyRead);
+				    	else {
+	                        output = delimiter_readDataBase(input, &nregs, &nfields);
+	                        read = true;
+                        }
 				        break;
 				    case PRINT_ALL:
 				    	delimiter_printDataBase(output, nregs);
+				    	printf("%s\n\n", endPrint);
 				        break;
 				    case SEARCH_BY_RECORD:
 				    	printf("Digite qual o numero do registro procurado\n"); 
@@ -107,7 +126,7 @@ int main(int argc, char *argv[]) {
 				        break;
 				    case SEARCH_BY_FIELD:
 				    	// ponteiro para o arquivo e a qtd de registros
-					    // delimiter_searchField(output, n);
+					    delimiter_searchField(output, nregs);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);
@@ -124,11 +143,17 @@ int main(int argc, char *argv[]) {
 			case FIXED_FIELDS:
 				switch(op) {
 				    case READ_FROM_FILE:
-                        output = fixed_readDataBase(input, &nregs, &nfields);
+				    	// if the file has already been read, abort
+				    	if (read) 
+				    		printf("%s", errorAlreadyRead);
+				    	else {
+	                        output = fixed_readDataBase(input, &nregs, &nfields);
+	                        read = true;
+                        }
 				        break;
 				    case PRINT_ALL:
 				    	fixed_printDataBase(output, nregs);
-				        printf("Done\n");
+				        printf("%s\n\n", endPrint);
 				        break;
 				    case SEARCH_BY_RECORD:
 				    	// Precisa de uma struct RECORD_SIZE com o tamanho de cada campo e o do registro nela
@@ -138,7 +163,7 @@ int main(int argc, char *argv[]) {
 				        break;
 				    case SEARCH_BY_FIELD:
 				    	// ponteiro para o arquivo e a qtd de registros
-					    // fixed_searchField(output, nregs);
+					    fixed_searchField(output, nregs);
 				        break;
 				    case SEARCH_BY_RECORD_BY_FIELD:
 				    	printf("%s", placeholder);

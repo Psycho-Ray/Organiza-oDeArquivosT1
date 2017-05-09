@@ -48,7 +48,7 @@ void delimiter_searchField(FILE *fp) {
 		}		
 		
 		// Read the delimiter
-		fread(&delim, sizeof(int), 1, fp);
+		fread(&delim, sizeof(char), 1, fp);
 		
 		// Frees used memory
 		free(search.query);

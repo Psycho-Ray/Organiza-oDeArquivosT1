@@ -13,6 +13,7 @@
 void size_searchField(FILE *fp, int n) {
 	t_searchField search;
 	t_field field;
+	char c;
 	bool found = false;
 	int i, record_size;
 	
@@ -25,12 +26,13 @@ void size_searchField(FILE *fp, int n) {
 		return;
 	}
 
-	for (i = 0; i < n; i++) {
-	
-		fread(&record_size, sizeof(int), 1, fp);
-	    
-	    if (!feof(fp)) {
-	        fseek(fp, -1, SEEK_CUR);
+	for (i = 0; (!feof(fp)); i++) {
+		
+	    fread(&c, sizeof(char), 1, fp);
+	    if (!feof(fp)) {	    
+	       	
+	       	fseek(fp, -1, SEEK_CUR); 
+       		fread(&record_size, sizeof(int), 1, fp);
 		
 			/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
 				Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 

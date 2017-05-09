@@ -20,14 +20,20 @@
 
 void size_printDataBase(FILE *fp, int n) {
 	t_field aux; 
+	char c;
 	int i, record_size; 
 
 	// Read every record
 	for (i = 0; !feof(fp); i++) {
 		
-		fread(&record_size, sizeof(int), 1, fp);
+	    fread(&c, sizeof(char), 1, fp);
+		if(!feof(fp)) {		
+			
+			fseek(fp, -1, SEEK_CUR);
+		
+			// Reads the size of the register
+			fread(&record_size, sizeof(int), 1, fp);
 
-		if(!feof(fp)) {
 			// Read the fields
 			aux = readFields(fp);
 
