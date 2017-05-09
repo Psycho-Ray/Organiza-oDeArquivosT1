@@ -67,6 +67,8 @@ void size_searchField(FILE *fp, int n) {
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");
+	
+	rewind(fp);
 }
 
 

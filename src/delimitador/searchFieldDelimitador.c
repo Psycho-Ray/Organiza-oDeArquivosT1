@@ -64,6 +64,8 @@ void delimiter_searchField(FILE *fp) {
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");
+	
+	rewind(fp);
 }
 
 

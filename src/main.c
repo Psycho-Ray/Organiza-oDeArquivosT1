@@ -60,9 +60,8 @@ int main(int argc, char *argv[]) {
     
 	/////////////////////////////////////////////////////////// DEBUGGING ///////////////////////////////////////////////////////////  
 	char placeholder[50] = "Função ainda não implementada.\n";
-	///////////////////////////////////////////////////////////
    
-	setlocale(LC_ALL, "portuguese");
+	setlocale(LC_ALL, "Portuguese");
    
     while(op != EXIT) {
         printMenu();
@@ -95,7 +94,7 @@ int main(int argc, char *argv[]) {
 				        printf("%s\n\n", endPrint);
 				        break;
 				    case SEARCH_BY_RECORD:
-						printf("Digite qual o numero do registro procurado\n"); 
+						printf("\n\nDigite qual o numero do registro procurado\n"); 
 				    	scanf("%d", &offset);
 						size_printRecord(output, nregs, offset);
 				        break;
@@ -126,7 +125,7 @@ int main(int argc, char *argv[]) {
 				    	printf("%s\n\n", endPrint);
 				        break;
 				    case SEARCH_BY_RECORD:
-				    	printf("Digite qual o numero do registro procurado\n"); 
+				    	printf("\n\nDigite qual o numero do registro procurado\n"); 
 				    	scanf("%d", &offset);
 						delimiter_printRecord(output, nregs, offset); 
 				        break;
@@ -157,7 +156,7 @@ int main(int argc, char *argv[]) {
 				        printf("%s\n\n", endPrint);
 				        break;
 				    case SEARCH_BY_RECORD:
-						printf("Digite qual o numero do registro procurado\n"); 
+						printf("\n\nDigite qual o numero do registro procurado\n"); 
 				    	scanf("%d", &offset);
 				    	fixed_printRecord(output, nregs, offset);
 				        break;

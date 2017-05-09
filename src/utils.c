@@ -4,6 +4,11 @@
 #include <string.h>	// strcmp
 #include <ctype.h> 	// isdigit
 
+
+//TODO: remove
+#include <locale.h>
+
+
 #include <utils.h>
 
 
@@ -61,15 +66,15 @@ t_field readFields(FILE *fp) {
         field.name = (char *) malloc(sizeof(char) * (name_size));
         fread(field.name, sizeof(char), name_size, fp);
 
-        // Reads the city name
-        fread(&city_size, sizeof(int), 1, fp);
-        field.city = (char *) malloc(sizeof(char) * (city_size));
-        fread(field.city, sizeof(char), city_size, fp);
-
         // Reads the state name
         fread(&state_size, sizeof(int), 1, fp);
         field.state = (char *) malloc(sizeof(char) * (state_size));
         fread(field.state, sizeof(char), state_size, fp);
+        
+        // Reads the city name
+        fread(&city_size, sizeof(int), 1, fp);
+        field.city = (char *) malloc(sizeof(char) * (city_size));
+        fread(field.city, sizeof(char), city_size, fp);
 
         // Reads the date and time when the domain was created
         field.dateTimeOri = (char *) malloc(sizeof(char) * (SIZE_FIXED));
@@ -115,14 +120,12 @@ int calculateRecordSize(t_field field) {
 }
 
 
-
-// TODO: como printar acento? ex: brasília....
 void printField(t_field field, int offset) {
 
 	printf("\n");
 				
 	if (strcmp(field.name, "null")) 
-		printf("\t%d - índo ção\t\t%s\n", offset, field.name);
+		printf("\t%d - \t\t%s\n", offset, field.name);
 	if (strcmp(field.domain, "null")) 
 		printf("\t\t\tDomain: \t\t\t%s\n", field.domain);
 	if (strcmp(field.document_number, "null")) 
@@ -148,11 +151,15 @@ t_field readRecord(FILE *input) {
     t_field field;
     field.data = malloc(sizeof(char *)*8);
 
-	// TODO: Verificar para os campos de tamanho fixo se a string não é maior que o nosso limite (SIZE_FIXED)
     for(i = 0; i < 8; i++) {
         string = readLine(input, ';', '\n');
         field.data[i] = string;
         field.dataSize[i] = strlen(string) + 1; // strlen(string) + \0
+        
+        // If its a fixed sized field, we check if it's not bigger than what we store
+        if(i == 1 || i == 5 || i == 6 || i == 7) 
+        	if(strlen(field.data[i]) > SIZE_FIXED)
+        		printf("Campo '%s' será truncado devido ao seu tamanho\n", field.data[i]);
     }
     
     // Reading extra \n
@@ -164,12 +171,15 @@ t_field readRecord(FILE *input) {
 
 
 char userContinue() {
+	// Asks the user if he wants to continue printing the registers.
 	int count = 0;
 	char c = 0;
 	printf("Digite 'p' para o próximo registro ou 'c' para abortar\n");
 	while (c != 'p' && c != 'c') {
 		count++;
 		c = getchar();
+		
+		// If the user seems not to understand, we carry on nonetheless.
 		if (count == 20) {
 			printf("Você parece estar com dificuldade para ir ao próximo registro");
 			printf("ou abortar, já foram 20 tentativas.\n");
@@ -182,6 +192,7 @@ char userContinue() {
 
 
 void freeRecord(t_field field) {
+	// Frees the memory in a record.
     int i;
     for(i = 0; i < 8; i++) free(field.data[i]);
     free(field.data);

@@ -59,7 +59,7 @@ void fixed_searchField(FILE *fp, int n) {
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");
-	// frees used memory
-	free(search.query);
+
+	rewind(fp);
 }
 

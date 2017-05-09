@@ -72,9 +72,13 @@ void size_printRecord(FILE *fp, int n, int offset) {
 		// Read's the record's size
 		fread(&record_size, sizeof(int), 1, fp);
 
-		// Skip the record
-		fseek(fp, record_size, SEEK_CUR);
+		aux = readFields(fp);
+		freeFields(aux);
 	}
+	
+	
+	// Reads the size of the wanted register
+	fread(&record_size, sizeof(int), 1, fp);
 
 	// Read the fields
 	aux = readFields(fp);
