@@ -1,9 +1,7 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-//#include <utils.h>
+//Alex Sander R. Silva
+//9779350
 
-/*Pula caracteres do arquivo até encontrar "delim" n vezes*/
+/*Pula caracteres do arquivo atÃ© encontrar "delim" n vezes*/
 int delimiter_fast_foward(FILE *file, int n, char delim) {
     int counter = 0;
     char aux;
@@ -42,14 +40,14 @@ int sizeMark_fast_foward(FILE *file, int n) {
 void jump_to_field(FILE *file, int n) {
     int i, size;
 
-    //Puça n campos
+    //PuÃ§a n campos
     for (i=0; i<n; i++) {
-        //Caso campos de tamanho fixo
+        //Caso campos de tamanho variÃ¡vel
         if (i == 0 || i == 2 || i == 3 || i == 4) {
             fread(&size, sizeof(int), 1, file);
             fseek(file, size, SEEK_CUR);
         }
-        //Caso campos de tamanho variável
+        //Caso campos de tamanho fixo
         else fseek(file, SIZE_FIXED, SEEK_CUR);
     }
 }
@@ -95,13 +93,16 @@ int jump_to_register(FILE *file, int type, int offset) {
     return feof(file);
 }
 
-/*Imprime o conteúdo do campo "field_offset" do registro "reg_offset"*/
-//Importante: Essa função enumera os campos à partir de 0
+/*Imprime o conteÃºdo do campo "field_offset" do registro "reg_offset"*/
+//Importante: Essa funÃ§Ã£o enumera os campos Ã  partir de 0
 void print_selected(FILE *file, int reg_type, int reg_offset, int field_offset) {
-    //Garante que percorrerá todo o arquivo
+    int size;
+    char *result;
+    
+    //Garante que percorrerÃ¡ todo o arquivo
     rewind(file);
 
-    //Caso offset inválido
+    //Caso offset invÃ¡lido
     if (reg_offset < 0 || field_offset < 0 || field_offset > 7) {
         printf("Numero de campo e/ou registro invalido\n");
         return;
@@ -110,15 +111,25 @@ void print_selected(FILE *file, int reg_type, int reg_offset, int field_offset) 
     //Pula para o registro "reg_offset"
     if (!jump_to_register(file, reg_type, reg_offset)) {
         //Caso "eof" encontrado antes do registro
-        printf("Registro não encontrado\n");
+        printf("Registro nÃ£o encontrado\n");
         return;
     }
 
     //Pula para o campo "field_offset"
     jump_to_field(file, field_offset);
 
-    //Lê e imprime o campo
-    char *result = readLine(file, ';', '\n');
+    //Caso campos de tamanho variÃ¡vel
+    if (field_offset == 0 || field_offset == 2 || field_offset == 3 || field_offset == 4) {
+        fread(&size, sizeof(int), 1, file);
+    }
+    //Caso campos de tamanho fixo
+    else size = FIXED_SIZE;
+    
+    //LÃª
+    result = (char *)malloc(size * sizeof(char));
+    fread(&size, sizeof(char), size, file);
+    
+    //Imprime
     printf("%s\n", result);
     free(result);
 
