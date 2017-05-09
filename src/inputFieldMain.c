@@ -47,8 +47,10 @@ bool verifyInputTicket(char *ticket) {
 	int i;
 	
 	// verifies the size of the ticket
-	if (strlen(ticket) != SIZE_TICKET)
+	if (strlen(ticket) > SIZE_FIXED) {
+		printf("Tamanho do ticket excedido seu limite\n");
 		return false;
+	}
 	
 	// verifies if all the characters are indeed numbers
 	for (i = 0; i < strlen(ticket); i += 1) 

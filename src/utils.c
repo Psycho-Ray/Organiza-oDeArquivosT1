@@ -122,7 +122,7 @@ void printField(t_field field, int offset) {
 	printf("\n");
 				
 	if (strcmp(field.name, "null")) 
-		printf("\t%d - \t\t%s\n", offset, field.name);
+		printf("\t%d - índo ção\t\t%s\n", offset, field.name);
 	if (strcmp(field.domain, "null")) 
 		printf("\t\t\tDomain: \t\t\t%s\n", field.domain);
 	if (strcmp(field.document_number, "null")) 
@@ -171,7 +171,7 @@ char userContinue() {
 		count++;
 		c = getchar();
 		if (count == 20) {
-			printf("Você parece estar com dificuldade para pressionar enter");
+			printf("Você parece estar com dificuldade para ir ao próximo registro");
 			printf("ou abortar, já foram 20 tentativas.\n");
 			printf("Continuando automaticamente para o próximo registo\n");
 			break;

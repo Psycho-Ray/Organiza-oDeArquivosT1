@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
 	char placeholder[50] = "Função ainda não implementada.\n";
 	///////////////////////////////////////////////////////////
    
-	setlocale(LC_ALL, "Portuguese");
+	setlocale(LC_ALL, "portuguese");
    
     while(op != EXIT) {
         printMenu();

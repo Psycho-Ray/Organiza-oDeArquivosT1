@@ -12,4 +12,6 @@ t_searchField searchFieldMain();
 
 bool searchFound(t_searchField search, t_field field);
 
+char continueSearch();
+
 #endif

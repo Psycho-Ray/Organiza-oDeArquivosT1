@@ -13,7 +13,7 @@
 void size_searchField(FILE *fp, int n) {
 	t_searchField search;
 	t_field field;
-	char c;
+	char c, askContinue;
 	bool found = false;
 	int i, record_size;
 	
@@ -42,15 +42,28 @@ void size_searchField(FILE *fp, int n) {
 		
 			// Verifies if its the field the user is looking for, with the corrects contents
 			if( searchFound(search, field)) {
+			
 				/* TODO: Modificar a impressão par ficar bonitinho, acho que o count não faz sentido */
 				printField(field, record_size);
 				found = true;
+				
+				// Asks the user if he wants to continue the search.
+				askContinue = continueSearch();
+				if (askContinue == 'c') {
+					printf("Abortando a pesquisa... ");
+					freeFields(field);
+					break;
+				}
 			}		
 			
 			// Frees used memory
-			free(search.query);
+			freeFields(field);
 		}
 	}
+	
+	// Frees used memory
+	free(search.query);
+	
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");

@@ -14,7 +14,7 @@ void delimiter_searchField(FILE *fp) {
 	t_searchField search;
 	t_field field;
 	bool found = false;
-	char delim;
+	char delim, askContinue;
 	int i;
 	
 	
@@ -41,14 +41,26 @@ void delimiter_searchField(FILE *fp) {
 			/* TODO: Modificar a impressão par ficar bonitinho, acho que o count não faz sentido */
 			printField(field, i);
 			found = true;
+			
+			// Asks the user if he wants to continue the search.
+			askContinue = continueSearch();
+			if (askContinue == 'c') {
+				printf("Abortando a pesquisa... ");
+				freeFields(field);
+				break;
+			}
 		}		
 		
 		// Read the delimiter
 		fread(&delim, sizeof(char), 1, fp);
 		
 		// Frees used memory
-		free(search.query);
+		freeFields(field);
 	}
+	
+	// Frees used memory
+	free(search.query);
+	
 	if(!found)
 		printf("Campo não encontrado em nenhum registro do arquivo.\n");
 	printf("Retornando ao menu\n");

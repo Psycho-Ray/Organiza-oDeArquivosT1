@@ -70,6 +70,7 @@ t_searchField searchFieldMain() {
 
 
 bool searchFound(t_searchField search, t_field field) {
+
 	if( (search.fieldType == DOMAIN && strcmp(field.domain, search.query) == 0) ||
 		(search.fieldType == DOCUMENT && strcmp(field.document_number, search.query) == 0) ||
 		(search.fieldType == NAME && strcmp(field.name, search.query) == 0) ||
@@ -81,9 +82,24 @@ bool searchFound(t_searchField search, t_field field) {
 	  ) return true;
 	else 
 		return false;
-	 
+}
 
 
+char continueSearch() {
+	int count = 0;
+	char c = 0;
+	printf("Digite 'p' continuar a busca ou 'c' para abortar\n");
+	while (c != 'p' && c != 'c') {
+		count++;
+		c = getchar();
+		if (count == 20) {
+			printf("Você parece estar com dificuldade para continuar a busca");
+			printf("ou abortar, já foram 20 tentativas.\n");
+			printf("Continuando automaticamente a busca\n");
+			break;
+		}
+	}
+	return c;
 }
 
 
