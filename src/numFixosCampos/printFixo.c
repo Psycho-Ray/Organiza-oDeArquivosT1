@@ -19,6 +19,7 @@
 void fixed_printDataBase(FILE *fp, int n) {
 	t_field aux; 
 	int i; 
+	char keepPrinting;
 
 	// Read every record
 	for (i = 0; !feof(fp); i++) {
@@ -37,7 +38,11 @@ void fixed_printDataBase(FILE *fp, int n) {
 			freeFields(aux);
 			
 			// Asks the user to press enter to continue
-			userContinue();
+			keepPrinting = userContinue();
+			if (keepPrinting == 'c') {
+				printf("Abortando... ");
+				break;
+			}
 		} 
 	}
 

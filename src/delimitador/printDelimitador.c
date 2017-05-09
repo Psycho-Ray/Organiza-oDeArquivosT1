@@ -20,7 +20,7 @@
 
 void delimiter_printDataBase(FILE *fp, int n) {
 	t_field aux;
-	char delim;
+	char delim, keepPrinting;
 	int i;
 
 	for(i = 0; !feof(fp); i++){
@@ -39,8 +39,12 @@ void delimiter_printDataBase(FILE *fp, int n) {
 			// Read the delimiter
 			fread(&delim, sizeof(char), 1, fp);
 			
-			// Asks the user to continue
-			userContinue();
+			// Asks the user to press enter to continue
+			keepPrinting = userContinue();
+			if (keepPrinting == 'c') {
+				printf("Abortando... ");
+				break;
+			}
 		}
 	}
 

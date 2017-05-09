@@ -20,7 +20,7 @@
 
 void size_printDataBase(FILE *fp, int n) {
 	t_field aux; 
-	char c;
+	char c, keepPrinting;
 	int i, record_size; 
 
 	// Read every record
@@ -44,7 +44,11 @@ void size_printDataBase(FILE *fp, int n) {
 			freeFields(aux);
 			
 			// Asks the user to press enter to continue
-			userContinue();
+			keepPrinting = userContinue();
+			if (keepPrinting == 'c') {
+				printf("Abortando... ");
+				break;
+			}
 		} 
 	}
 

@@ -163,19 +163,21 @@ t_field readRecord(FILE *input) {
 }
 
 
-void userContinue() {
+char userContinue() {
 	int count = 0;
 	char c = 0;
-	printf("Digite p para o próximo registro\n");
-	while (c != 'p') {
+	printf("Digite 'p' para o próximo registro ou 'c' para abortar\n");
+	while (c != 'p' && c != 'c') {
 		count++;
 		c = getchar();
-		if (count == 10) {
-			printf("Você parece estar com dificuldade para pressionar enter.\n");
-			printf("Continuando para o próximo registo\n");
+		if (count == 20) {
+			printf("Você parece estar com dificuldade para pressionar enter");
+			printf("ou abortar, já foram 20 tentativas.\n");
+			printf("Continuando automaticamente para o próximo registo\n");
 			break;
 		}
 	}
+	return c;
 }
 
 

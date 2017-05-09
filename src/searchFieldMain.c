@@ -43,10 +43,11 @@ t_searchField searchFieldMain() {
 	
 		printf("\n");
 		// reads the user input
-		printf("Digite o campo: \n");
+		printf("Digite o campo: ");
+		// Removes leading '\n'
+		scanf("\n");
 		search.fieldType = op;
 		search.query = readLine(stdin, '\n', '\n');
-		printf("certo...não deveria estar chegando aqui antes de ler o input\n");
 		
 		// if the user has decided to abortar
 		if (strlen(search.query) == 0) {
@@ -69,17 +70,17 @@ t_searchField searchFieldMain() {
 
 
 bool searchFound(t_searchField search, t_field field) {
-	if( (search.fieldType == DOMAIN && strcmp(field.domain, search.query)) ||
-		(search.fieldType == DOCUMENT && strcmp(field.document_number, search.query)) ||
-		(search.fieldType == NAME && strcmp(field.name, search.query)) ||
-		(search.fieldType == CITY && strcmp(field.city, search.query)) ||
-		(search.fieldType == STATE && strcmp(field.state, search.query)) ||
-		(search.fieldType == DATE_CREATED && strcmp(field.dateTimeOri, search.query)) ||
-		(search.fieldType == DATE_UPDATED && strcmp(field.dateTimeUpd, search.query)) ||
-		(search.fieldType == TICKET && strcmp(field.ticket, search.query))
-	  ) 
-		return true;
-	return false;
+	if( (search.fieldType == DOMAIN && strcmp(field.domain, search.query) == 0) ||
+		(search.fieldType == DOCUMENT && strcmp(field.document_number, search.query) == 0) ||
+		(search.fieldType == NAME && strcmp(field.name, search.query) == 0) ||
+		(search.fieldType == CITY && strcmp(field.city, search.query) == 0) ||
+		(search.fieldType == STATE && strcmp(field.state, search.query) == 0) ||
+		(search.fieldType == DATE_CREATED && strcmp(field.dateTimeOri, search.query) == 0) ||
+		(search.fieldType == DATE_UPDATED && strcmp(field.dateTimeUpd, search.query) == 0) ||
+		(search.fieldType == TICKET && strcmp(field.ticket, search.query) == 0)
+	  ) return true;
+	else 
+		return false;
 	 
 
 
