@@ -21,19 +21,24 @@ void fixed_printDataBase(FILE *fp, int n) {
 	int i; 
 
 	// Read every record
-	for (i = 0; i < n; i++) {
+	for (i = 0; !feof(fp); i++) {
 
 		// Read the fields
 		aux = readFields(fp);
 
-		// Print them
-		printField(aux, i);
-		
-		// Frees used memory
-		freeFields(aux);
-		
-		// Asks the user to press enter to continue
-		userContinue();
+		if(!feof(fp)) {
+			// Read the fields
+			aux = readFields(fp);
+
+			// Print them
+			printField(aux, i);
+			
+			// Free the memory
+			freeFields(aux);
+			
+			// Asks the user to press enter to continue
+			userContinue();
+		} 
 	}
 
 	// Make the file pointer return to the begging of the file
