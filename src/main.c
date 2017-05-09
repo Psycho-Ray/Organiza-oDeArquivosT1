@@ -131,10 +131,9 @@ int main(int argc, char *argv[]) {
 				        printf("Done\n");
 				        break;
 				    case SEARCH_BY_RECORD:
-				    	// Precisa de uma struct RECORD_SIZE com o tamanho de cada campo e o do registro nela
-				    	// de um ponteiro para o arquivo de registros, quantidade de registros e o offset
-				    	// void fixed_printRecord(RECORD_SIZE *size, FILE *fp, int n, int offset);
-				        printf("Done\n");
+						printf("Digite qual o numero do registro procurado\n"); 
+				    	scanf("%d", &offset);
+				    	fixed_printRecord(output, nregs, offset);
 				        break;
 				    case SEARCH_BY_FIELD:
 				    	// ponteiro para o arquivo e a qtd de registros
