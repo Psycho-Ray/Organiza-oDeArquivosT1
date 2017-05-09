@@ -46,7 +46,7 @@ t_searchField searchFieldMain() {
 		printf("Digite o campo: \n");
 		search.fieldType = op;
 		search.query = readLine(stdin, '\n', '\n');
-		printf("certo...DEBUGAR\n");
+		printf("certo...não deveria estar chegando aqui antes de ler o input\n");
 		
 		// if the user has decided to abortar
 		if (strlen(search.query) == 0) {

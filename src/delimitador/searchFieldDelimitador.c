@@ -22,20 +22,16 @@ void delimiter_searchField(FILE *fp) {
 	search = searchFieldMain();
 	
 	// If the user has decided to abort at the end of the last function, we abort
-	if (search.fieldType == INVALID || strlen(search.query) == 0) {
+	if (search.fieldType == INVALID)
+		return;
+	// If the there is used memory("\0"), free it before aborting
+	if (strlen(search.query) == 0) {
 		free(search.query);
 		return;
 	}
 
+
 	for(i = 0; !feof(fp); i++){
-		
-		/* TODO: Essa não é a versão mais otimizado que poderia ser feito.
-			Se estou procurando por um domínio específico (primeiro campo), tecnicamente não precisao alocar os outros 7 
-			se estiver errado aquele domínio, apenas ler o tamanho do campo e dar fseek.
-			Mas isso envolveria implementar 8 ifs diferente, muuuitos iguais....
-			Posso deixar assim e mencionar isso no relatório? 
-		*/
-		// TODO: Supoe que guardamos o \0 na string
 
 		// Reads a field
 		field = readFields(fp);
