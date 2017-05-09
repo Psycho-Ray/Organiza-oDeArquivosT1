@@ -16,9 +16,11 @@ t_searchField searchFieldMain() {
 	t_searchField search;
 	search.fieldType = INVALID;
 	
+	printf("\n\n");
+	
 	// TODO: explicar como devera ser digitado os inputs com tamanho fixo.
 	while( !validInput) {	
-		while (op >= 0 && op < 9) {
+		while (op < 0 || op >= 9) {
 			// TODO: Reordenar isso
 			printf("Digite o número correspondente ao campo que quer pesquisar nos registros, ou 0 para abortar e voltar ao menu\n");
 			printf("1 - Domain\n");
@@ -39,10 +41,12 @@ t_searchField searchFieldMain() {
 				return search;
 		}
 	
+		printf("\n");
 		// reads the user input
-		printf("Digite o campo: ");
+		printf("Digite o campo: \n");
 		search.fieldType = op;
 		search.query = readLine(stdin, '\n', '\n');
+		printf("certo...DEBUGAR\n");
 		
 		// if the user has decided to abortar
 		if (strlen(search.query) == 0) {

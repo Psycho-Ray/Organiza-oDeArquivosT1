@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
     int offset;
     char endPrint[37] = "Fim da impressão, voltando ao menu\n\0";
     char errorAlreadyRead[48] = "Arquivo já lido, abortando e voltando ao menu\n\0";
+    char errorNotRead[64] = "Arquivo .csv ainda não foi lido, abortando e voltando ao menu\n\0";
     
     while (regType < 1 || regType > 3) {
     	printf("\n");
@@ -67,19 +68,29 @@ int main(int argc, char *argv[]) {
         printMenu();
         scanf("%d", &op);
         
+    	// if the csv file has already been read, abort
+        if (op == READ_FROM_FILE && read) {
+        	printf("%s", errorAlreadyRead);
+        	continue;
+    	}
+        
+        // if the csv file has not yet been read, abort these functions
+        if (op == PRINT_ALL || op == SEARCH_BY_RECORD || op == SEARCH_BY_FIELD ||
+        	op == SEARCH_BY_RECORD_BY_FIELD) {
+        	 if (!read) {
+        	 	printf("%s", errorNotRead);	
+        	 	continue;
+    	 	}
+	 	}
+        
         switch(regType) {
         	case SIZE_INDICATOR:
 				switch(op) {
 				    case READ_FROM_FILE:
-				    	// if the file has already been read, abort
-				    	if (read) 
-				    		printf("%s", errorAlreadyRead);
-				    	else {
-	                        output = size_readDataBase(input, &nregs, &nfields);
-	                        read = true;
-                        }
+                        output = size_readDataBase(input, &nregs, &nfields);
+                        read = true;
 				        break;
-				    case PRINT_ALL:
+				    case PRINT_ALL:				    
 						size_printDataBase(output, nregs);
 				        printf("%s\n\n", endPrint);
 				        break;
@@ -107,13 +118,8 @@ int main(int argc, char *argv[]) {
 			case DELIMITER:
 				switch(op) {
 				    case READ_FROM_FILE:
-				    	// if the file has already been read, abort
-				    	if (read) 
-				    		printf("%s", errorAlreadyRead);
-				    	else {
-	                        output = delimiter_readDataBase(input, &nregs, &nfields);
-	                        read = true;
-                        }
+	                    output = delimiter_readDataBase(input, &nregs, &nfields);
+                        read = true;
 				        break;
 				    case PRINT_ALL:
 				    	delimiter_printDataBase(output, nregs);
@@ -143,13 +149,8 @@ int main(int argc, char *argv[]) {
 			case FIXED_FIELDS:
 				switch(op) {
 				    case READ_FROM_FILE:
-				    	// if the file has already been read, abort
-				    	if (read) 
-				    		printf("%s", errorAlreadyRead);
-				    	else {
-	                        output = fixed_readDataBase(input, &nregs, &nfields);
-	                        read = true;
-                        }
+                        output = fixed_readDataBase(input, &nregs, &nfields);
+                        read = true;
 				        break;
 				    case PRINT_ALL:
 				    	fixed_printDataBase(output, nregs);
